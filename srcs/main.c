@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2020/11/22 12:13:43 by abenani          ###   ########.fr       */
+/*   Updated: 2020/12/17 19:03:06 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 #include "../include/RTv1.h"
 #include <stdbool.h>
 
-
 int randInt(int rmin, int rmax) {
     return rand() % rmax + rmin;
 }
-
 
 int main(int argc, char *argv[])
 {
     if(SDL_Init(SDL_INIT_VIDEO) >= 0)
     {
-        ft_putendl("no error");
+        ft_putendl("nooooooo error");
     }
     else
         ft_putendl("errorrrrr");
