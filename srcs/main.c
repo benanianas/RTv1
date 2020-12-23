@@ -3,70 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2020/12/17 19:03:06 by abenani          ###   ########.fr       */
+/*   Updated: 2020/12/23 18:25:26 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/RTv1.h"
-#include <stdbool.h>
 
-int randInt(int rmin, int rmax) {
-    return rand() % rmax + rmin;
-}
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-    if(SDL_Init(SDL_INIT_VIDEO) >= 0)
-    {
-        ft_putendl("nooooooo error");
-    }
-    else
-        ft_putendl("errorrrrr");
-
-    SDL_Window *window = SDL_CreateWindow("Hello, SDL2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_OPENGL);
+    SDL_Window      *window;
+    SDL_Renderer    *renderer;
+    SDL_Event       event;
+    int             running;
     
-
-    // Create a renderer (accelerated and in sync with the display refresh rate)
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);    
+    SDL_Init(SDL_INIT_VIDEO);
+    window = SDL_CreateWindow("RTv1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, W_WIDTH, W_HEIGHT, SDL_WINDOW_OPENGL);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     
-
-    // Initial renderer color
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-
-    bool running = true;
-    SDL_Event event;
-    while(running) {
-        // Process events
-        while(SDL_PollEvent(&event)) {
+    SDL_RenderDrawPoint(renderer, 400, 300);
+    SDL_RenderPresent(renderer);
+    
+    running = 1;
+    while(running)
+        while(SDL_PollEvent(&event))
+        {
             if(event.type == SDL_QUIT) {
-                running = false;
-            } else if(event.type == SDL_KEYDOWN) {
-                const char *key = SDL_GetKeyName(event.key.keysym.sym);
-                if(strcmp(key, "C") == 0) {
-                    SDL_SetRenderDrawColor(renderer, randInt(0, 255), randInt(0, 255), randInt(0, 255), 255);
-                }                    
+                running = 0;
             }
+            // ft_putchar(event.key.keysym.sym);
+            // ft_putstr(" : ");
+            // ft_putstr(SDL_GetKeyName(event.key.keysym.sym));
+            // ft_putendl("  ");
         }
+    
 
-        // Clear screen
-        SDL_RenderClear(renderer);
-
-        // Draw
-
-        // Show what was drawn
-        SDL_RenderPresent(renderer);
-    }
-
-    // Release resources
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
-
-    return 0;
 
     return 0;
 }
