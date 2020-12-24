@@ -1,0 +1,34 @@
+build/SDL_blit_1.lo: \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/SDL_blit_1.c \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/../SDL_internal.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/../dynapi/SDL_dynapi.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/../dynapi/SDL_dynapi_overrides.h \
+  include/SDL_config.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_platform.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/begin_code.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/close_code.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_video.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_stdinc.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_config.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_pixels.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_endian.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_rect.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_error.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_rwops.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_surface.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_blendmode.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/SDL_blit.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_cpuinfo.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/SDL_sysvideo.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_messagebox.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_shape.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_thread.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_atomic.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_mutex.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_metal.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/SDL_vulkan_internal.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/./khronos/vulkan/vulkan.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/./khronos/vulkan/vk_platform.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/./khronos/vulkan/vulkan_core.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/video/./khronos/vulkan/vulkan_macos.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_vulkan.h

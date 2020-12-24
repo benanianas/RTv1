@@ -1,0 +1,32 @@
+build/SDL_coreaudio.lo: \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/SDL_coreaudio.m \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../../SDL_internal.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../../dynapi/SDL_dynapi.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../../dynapi/SDL_dynapi_overrides.h \
+  include/SDL_config.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_platform.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/begin_code.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/close_code.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_audio.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_stdinc.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_config.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_error.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_endian.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_mutex.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_thread.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_atomic.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_rwops.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_hints.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../SDL_audio_c.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../SDL_sysaudio.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../../SDL_dataqueue.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/.././SDL_audio_c.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/SDL_coreaudio.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/include/SDL_assert.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../../thread/SDL_systhread.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../../thread/../SDL_internal.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../../thread/SDL_thread_c.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../../thread/pthread/SDL_systhread_c.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../../thread/pthread/../../SDL_internal.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../../thread/../SDL_error_c.h \
+  /Users/moel-aza/Desktop/rtv1/SDL2-2.0.12/src/audio/coreaudio/../.././SDL_internal.h

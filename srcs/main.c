@@ -3,49 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2020/12/23 18:25:26 by abenani          ###   ########.fr       */
+/*   Updated: 2020/12/24 17:03:18 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/RTv1.h"
 
-
-int main(int argc, char **argv)
+char **file_reader(char **av, char **table)
 {
-    SDL_Window      *window;
-    SDL_Renderer    *renderer;
-    SDL_Event       event;
-    int             running;
-    
-    SDL_Init(SDL_INIT_VIDEO);
-    window = SDL_CreateWindow("RTv1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, W_WIDTH, W_HEIGHT, SDL_WINDOW_OPENGL);
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderDrawPoint(renderer, 400, 300);
-    SDL_RenderPresent(renderer);
-    
-    running = 1;
-    while(running)
-        while(SDL_PollEvent(&event))
+    int fd;
+    char tmp[BUFF_SIZE + 1];
+    int i;
+    char *file_str;
+
+    file_str = "\0";
+    if ((fd = open(av[1], 0)))
+    {
+        while ((i = read(fd, tmp, BUFF_SIZE)))
         {
-            if(event.type == SDL_QUIT) {
-                running = 0;
-            }
-            // ft_putchar(event.key.keysym.sym);
-            // ft_putstr(" : ");
-            // ft_putstr(SDL_GetKeyName(event.key.keysym.sym));
-            // ft_putendl("  ");
+            tmp[i] = '\0';
+            file_str = ft_strjoin(file_str, tmp);
         }
+    }
+    table = ft_strsplit(file_str, '\n');
+    return table;
+}
+
+t_obj parser(int ac, char **av)
+{
+    t_obj object;
+    char **table;
+
+     
+    if (ac != 2 || !(table = file_reader(av,table)) || !(table[2]))
+        return (object);
     
+    return (object);
+}
+int main(int ac, char **av)
+{
+    t_obj object;
 
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-
+    if (!(object = parser(ac,av)))
+        perror("file ERROR :(");
     return 0;
 }
