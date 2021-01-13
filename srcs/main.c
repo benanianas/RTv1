@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2020/12/24 17:03:18 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/01/13 19:00:39 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/RTv1.h"
 
@@ -44,11 +43,44 @@ t_obj parser(int ac, char **av)
     
     return (object);
 }
+
+int exitSdl(t_sdl sdl)
+{
+    SDL_Event e;
+    
+    if(SDL_PollEvent(&e))
+    {
+        if (e.type == SDL_QUIT || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE))
+        {
+            SDL_DestroyRenderer(sdl.rend);
+            SDL_DestroyWindow(sdl.win);
+            SDL_Quit();
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int main(int ac, char **av)
 {
-    t_obj object;
+    // t_obj object;
 
-    if (!(object = parser(ac,av)))
-        perror("file ERROR :(");
+    // if (!(object = parser(ac,av)))
+    //     perror("file ERROR :(");
+    // return 0;
+
+    t_sdl sdl;
+    
+    SDL_Init(SDL_INIT_VIDEO);
+    sdl.win = SDL_CreateWindow("RTv1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, W_WIDTH, W_HEIGHT, SDL_WINDOW_OPENGL);
+    sdl.rend = SDL_CreateRenderer(sdl.win, -1, SDL_RENDERER_ACCELERATED  | SDL_RENDERER_PRESENTVSYNC);
+
+     SDL_SetRenderDrawColor(sdl.rend, 0, 255, 0, 255);
+     SDL_RenderDrawPoint(sdl.rend, 0, 0);
+    SDL_RenderPresent(sdl.rend);
+    
+    while(1)
+        if(exitSdl(sdl))
+            break;
     return 0;
 }
