@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/15 18:41:03 by abenani          ###   ########.fr       */
+/*   Updated: 2021/01/15 18:47:46 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include "../SDL2-2.0.12/build/include/SDL2/SDL.h"
 # include <math.h>
 # include "../libft/libft.h"
