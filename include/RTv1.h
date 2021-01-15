@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/15 12:00:50 by abenani          ###   ########.fr       */
+/*   Updated: 2021/01/15 15:14:19 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ typedef struct      s_sdl
     SDL_Window      *win;
     SDL_Renderer    *rend;
 }                   t_sdl;
+
+int    startSdl(t_sdl *sdl);
+int exitSdl(t_sdl sdl);
+void draw(SDL_Renderer    *rend);
 
 
 #endif

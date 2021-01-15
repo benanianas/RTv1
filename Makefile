@@ -6,13 +6,13 @@
 #    By: abenani <abenani@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/11 10:39:21 by abenani           #+#    #+#              #
-#    Updated: 2020/12/17 19:15:02 by abenani          ###   ########.fr        #
+#    Updated: 2021/01/15 15:23:58 by abenani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RTv1
 CC = gcc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SDLSRC = SDL2-2.0.12.tar.gz
 HDR = include/RTv1.h
 SDL = SDL2-2.0.12
@@ -22,7 +22,7 @@ LIBFTD = libft
 
 
 
-SRC_F = main.c 
+SRC_F = main.c
 SRC = $(addprefix srcs/, $(SRC_F))
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
@@ -31,7 +31,7 @@ all: $(NAME)
 
 $(NAME):$(SDL) $(OBJ)
 		 @$(MAKE) -C $(LIBFTD)
-		 $(CC) $(OBJ) $(LIBFT) $(C_SDL) -o $(NAME)		
+		 $(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(C_SDL) -o $(NAME)		
 
 $(SDL):
 		tar -xf $(SDLSRC) && mkdir $(SDLB)

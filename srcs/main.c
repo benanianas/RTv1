@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/15 13:18:22 by abenani          ###   ########.fr       */
+/*   Updated: 2021/01/15 15:23:51 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ t_obj parser(int ac, char **av)
 int    startSdl(t_sdl *sdl)
 {
     if(!SDL_Init(SDL_INIT_VIDEO))
-        if(sdl->win = SDL_CreateWindow("RTv1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, W_WIDTH, W_HEIGHT, SDL_WINDOW_SHOWN))
-            if(sdl->rend = SDL_CreateRenderer(sdl->win, -1, SDL_RENDERER_ACCELERATED))
+    {
+        if((sdl->win = SDL_CreateWindow("RTv1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, W_WIDTH, W_HEIGHT, SDL_WINDOW_SHOWN)))
+            if((sdl->rend = SDL_CreateRenderer(sdl->win, -1, SDL_RENDERER_SOFTWARE)))
                 return 1;
             else
                 SDL_DestroyWindow(sdl->win);
+    }
         else
            SDL_Quit();
     return 0;
@@ -77,7 +79,7 @@ int exitSdl(t_sdl sdl)
 void draw(SDL_Renderer    *rend)
 {
     // SDL_SetRenderDrawBlendMode(rend, SDL_BLENDMODE_BLEND);
-    SDL_SetRenderDrawColor(rend, 0, 0, 255, 50);
+    SDL_SetRenderDrawColor(rend, 255, 0, 255, 255);
     int i = 0;
     while (i < W_HEIGHT)
     {
