@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/15 15:14:19 by abenani          ###   ########.fr       */
+/*   Updated: 2021/01/15 18:41:03 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-#include <fcntl.h>
-# include <SDL.h>
+# include "../SDL2-2.0.12/build/include/SDL2/SDL.h"
 # include <math.h>
 # include "../libft/libft.h"
 
@@ -40,9 +39,9 @@ typedef struct      s_sdl
     SDL_Renderer    *rend;
 }                   t_sdl;
 
-int    startSdl(t_sdl *sdl);
-int exitSdl(t_sdl sdl);
-void draw(SDL_Renderer    *rend);
+int                 startSdl(t_sdl *sdl);
+int                 exitSdl(t_sdl sdl);
+void                draw(SDL_Renderer    *rend);
 
 
 #endif
