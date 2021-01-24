@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+         #
+#    By: abenani <abenani@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/11 10:39:21 by abenani           #+#    #+#              #
-#    Updated: 2021/01/15 18:45:50 by abenani          ###   ########.fr        #
+#    Updated: 2021/01/16 12:08:49 by abenani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RTv1
 CC = gcc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 SDLSRC = SDL2-2.0.12.tar.gz
-HDR = include/RTv1.h
+HDR_F = ../include/RTv1.h
 SDL = SDL2-2.0.12
 SDLB = $(SDL)/build
 C_SDL = `$(SDLB)/sdl2-config --cflags --libs`
@@ -40,14 +40,13 @@ $(SDL):
 		$(MAKE) -C $(SDLB)
 		$(MAKE) -C $(SDLB) install
 
-$(SRC_D)/%.o: %.c
-		$(CC) -I $(SDLB)/include/SDL2 -c -o $< $@
+$(SRC_D)/%.o: %.c $(HDR_F)
+		$(CC) $(CFLAGS) -c $< -o $@
 clean:
 		rm -f $(OBJ)
 		@$(MAKE) -C $(LIBFTD) clean
 		
 fclean: clean
-		@@$(MAKE) -C $(LIBFTD) fclean
+		@$(MAKE) -C $(LIBFTD) fclean
 		rm -f $(NAME)
 		rm -rf $(SDL)
-

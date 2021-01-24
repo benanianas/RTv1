@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/15 18:47:46 by abenani          ###   ########.fr       */
+/*   Updated: 2021/01/16 12:07:11 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "../SDL2-2.0.12/build/include/SDL2/SDL.h"
+// # include <SDL.h>
 # include <math.h>
 # include "../libft/libft.h"
 
