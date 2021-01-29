@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:13:01 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/25 09:43:07 by abenani          ###   ########.fr       */
+/*   Updated: 2021/01/29 13:45:12 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,25 @@ int exitSdl(t_sdl sdl)
     return 0;
 }
 
-void draw(SDL_Renderer    *rend)
+void draw(SDL_Renderer    *rend, t_color *colors)
 {
     int i;
     int j;
     
     // SDL_SetRenderDrawBlendMode(rend, SDL_BLENDMODE_BLEND);
-    SDL_SetRenderDrawColor(rend, 0, 0, 255, 255);
-    i = 0;
-    while (j < W_WIDTH)
+    j = 0;
+    while (j < W_HEIGHT)
     {
-        j = 0;
-        while(j < W_HEIGHT)
+        i = 0;
+        while(i < W_WIDTH)
         {
+            t_color color = colors[W_WIDTH*j+i];
+            SDL_SetRenderDrawColor(rend, color.r, color.g, color.b, color.a);
             SDL_RenderDrawPoint(rend, i, j);
-            j++;
+            i++;
         }
-        i++;
+        j++;
     }
     SDL_RenderPresent(rend);
+    free(colors);
 }

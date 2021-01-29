@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abenani <abenani@student.42.fr>            +#+  +:+       +#+         #
+#    By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/11 10:39:21 by abenani           #+#    #+#              #
-#    Updated: 2021/01/16 12:08:49 by abenani          ###   ########.fr        #
+#    Updated: 2021/01/29 13:17:51 by abenani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ all: $(NAME)
 
 $(NAME):$(SDL) $(OBJ)
 		 @$(MAKE) -C $(LIBFTD)
-		 $(CC) $(OBJ) $(LIBFT) $(C_SDL) -o $@		
+		 $(CC) $(OBJ) $(LIBFT) $(C_SDL) -o $@ -lm
 
 $(SDL):
 		tar -xf $(SDLSRC) && mkdir $(SDLB)
