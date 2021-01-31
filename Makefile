@@ -6,7 +6,7 @@
 #    By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/11 10:39:21 by abenani           #+#    #+#              #
-#    Updated: 2021/01/29 13:17:51 by abenani          ###   ########.fr        #
+#    Updated: 2021/01/31 13:03:11 by abenani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_D = srcs
 
 
 
-SRC_F = main.c sdltools.c
+SRC_F = main.c sdltools.c vecs.c
 SRC = $(addprefix srcs/, $(SRC_F))
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a

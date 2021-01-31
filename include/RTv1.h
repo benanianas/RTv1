@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/29 13:32:49 by abenani          ###   ########.fr       */
+/*   Updated: 2021/01/31 13:02:05 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ typedef struct      s_sdl
     SDL_Renderer    *rend;
 }                   t_sdl;
 
+typedef struct      s_vec
+{
+    double          x;
+    double          y;
+    double          z;
+}                   t_vec;
+
 typedef struct      s_color
 {
     int             r;
@@ -52,6 +59,15 @@ typedef struct      s_color
 int                 startSdl(t_sdl *sdl);
 int                 exitSdl(t_sdl sdl);
 void                draw(SDL_Renderer    *rend, t_color *colors);
+
+
+t_vec               vec(double x, double y, double z);
+t_vec               vec_dot(t_vec a, t_vec b);
+t_vec               vec_cross(t_vec a, t_vec b);
+double              vec_magnitude(t_vec vec);
+t_vec               vec_unit(t_vec vec);
+t_vec               vec_add(t_vec a, t_vec b);
+
 
 
 

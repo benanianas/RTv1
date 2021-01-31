@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/29 13:44:40 by abenani          ###   ########.fr       */
+/*   Updated: 2021/01/31 13:04:18 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ void render(t_color *colors)
     int h = W_HEIGHT;
     float ratio = w / h;
     
-    // t_color *colors;
-    // colors = malloc(w * h * sizeof(t_color));
+    //to remove
+    //*******//
     t_color test;
-    // test = {0, 255, 0 , 255}
     test.r = 0;
-    test.g = 255;
-    test.b = 0;
+    test.g = 0;
+    test.b = 255;
     test.a = 255;
 
     j = 0;
@@ -56,15 +55,20 @@ int main(int ac, char **av)
    
     if(!startSdl(&sdl))
         exit (0);
-    //here the rendering function (returns a table of colors)
+    // here the rendering function (returns a table of colors)
     // pass the tabele to draw 
     render(colors);
     
     draw(sdl.rend, colors);
+    
 
 
     while(1)
         if(exitSdl(sdl))
             break;
+
+
+
+    
     return 0;
 }
