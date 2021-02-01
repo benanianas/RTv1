@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/01 12:56:30 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/01 20:44:10 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ t_vec               vec_add(t_vec a, t_vec b);
 t_vec               vec_num(t_vec vec, double num);
 
 
-void                camera_matx(t_vec from, t_vec to);
+t_vecs                camera_matx(t_vec from, t_vec to);
+t_vec   camera_transform(t_vecs vecs, t_vec old_p, t_vec tr);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/01 13:02:23 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/01 20:47:41 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_vec   camera_transform(t_vecs vecs, t_vec old_p, t_vec tr)
     t_vec   new_p;
 
     new_p.x = old_p.x * vecs.r.x + old_p.y * vecs.u.x + old_p.z * vecs.f.x + tr.x;
-    new_p.x = old_p.x * vecs.r.y + old_p.y * vecs.u.y + old_p.z * vecs.f.y + tr.y;
-    new_p.x = old_p.x * vecs.r.z + old_p.y * vecs.u.z + old_p.z * vecs.f.z + tr.z;
+    new_p.y = old_p.x * vecs.r.y + old_p.y * vecs.u.y + old_p.z * vecs.f.y + tr.y;
+    new_p.z = old_p.x * vecs.r.z + old_p.y * vecs.u.z + old_p.z * vecs.f.z + tr.z;
 
     return (new_p);
     

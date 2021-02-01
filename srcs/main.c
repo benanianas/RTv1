@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/01 10:49:42 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/01 20:47:19 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,27 @@ int main(int ac, char **av)
     // while(1)
     //     if(exitSdl(sdl))
     //         break;
+    t_vec point;
 
+    point.x = 0;
+    point.y = 0;
+    point.z = -1;
+    
     t_vec from;
-    from.x = 2;
-    from.y = 2;
-    from.z = 2;
-
+    from.x = 0;
+    from.y = 0;
+    from.z = 0;
+    
     t_vec to;
     to.x = 0;
     to.y = 0;
-    to.z = 0;
-    
-    camera_matx(from, to);
+    to.z = -1;
+
+    t_vecs vecs = camera_matx(from, to);
+
+    t_vec new = camera_transform(vecs, point, from);
+
+    printf("(%f,%f,%f)\n", new.x, new.y, new.z);
     
     
     return 0;
