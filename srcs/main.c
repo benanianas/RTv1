@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/31 13:04:18 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/01 10:49:42 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void render(t_color *colors)
         i = 0;
         while(i < w)
         {
-            float x = (2*((i+.5)/w)-1) * ratio ;// *Zoom 
-            float y = 1-2*((j+.5)/h);// *Zoom
+            float x = (2*((i+.5)/w)-1) * ratio ; 
+            float y = 1-2*((j+.5)/h);
             // printf("[%.4f , %.4f] ", x, y);
             int num = w*j+i;
             colors[num] =  test;
@@ -49,26 +49,30 @@ void render(t_color *colors)
 
 int main(int ac, char **av)
 {
-    t_sdl sdl;
-    t_color *colors;
-    colors = malloc(W_WIDTH * W_HEIGHT * sizeof(t_color));
+    // t_sdl sdl;
+    // t_color *colors;
+    // colors = malloc(W_WIDTH * W_HEIGHT * sizeof(t_color));
    
-    if(!startSdl(&sdl))
-        exit (0);
-    // here the rendering function (returns a table of colors)
-    // pass the tabele to draw 
-    render(colors);
+    // if(!startSdl(&sdl))
+    //     exit (0);
+    // render(colors);
+    // draw(sdl.rend, colors);
+    // while(1)
+    //     if(exitSdl(sdl))
+    //         break;
+
+    t_vec from;
+    from.x = 2;
+    from.y = 2;
+    from.z = 2;
+
+    t_vec to;
+    to.x = 0;
+    to.y = 0;
+    to.z = 0;
     
-    draw(sdl.rend, colors);
+    camera_matx(from, to);
     
-
-
-    while(1)
-        if(exitSdl(sdl))
-            break;
-
-
-
     
     return 0;
 }

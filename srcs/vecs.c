@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 11:25:34 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/31 13:00:33 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/01 12:40:07 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,9 @@ t_vec   vec(double x, double y, double z)
     return (vec);
 }
 
-t_vec   vec_dot(t_vec a, t_vec b)
+double  vec_dot(t_vec a, t_vec b)
 {
-    t_vec ret;
-
-    ret.x = a.x * b.x;
-    ret.y = b.x * b.y;
-    ret.z = a.z * b.z;
-    return (ret);
+    return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
 t_vec   vec_cross(t_vec a, t_vec b)
@@ -44,22 +39,19 @@ t_vec   vec_cross(t_vec a, t_vec b)
 
 double  vec_magnitude(t_vec vec)
 {
-    t_vec   ret;
-    
-    ret = vec_dot(vec, vec);
-    return (sqrt(ret.x + ret.y + ret.z));
+    return (sqrt(vec_dot(vec, vec)));
 }
 
 t_vec   vec_unit(t_vec vec)
 {
     t_vec ret;
-    double mgn;
+    double mgn_ivt;
     
-    mgn = vec_magnitude(vec);
+    mgn_ivt = (double)1/vec_magnitude(vec);
     
-    ret.x = vec.x/mgn;
-    ret.y = vec.y/mgn;
-    ret.z = vec.z/mgn;
+    ret.x = vec.x * mgn_ivt;
+    ret.y = vec.y * mgn_ivt;
+    ret.z = vec.z * mgn_ivt;
     
     return (ret);
 }
@@ -68,8 +60,18 @@ t_vec   vec_add(t_vec a, t_vec b)
 {
     t_vec ret;
 
-    ret.x = a.x = b.x;
-    ret.y = a.y = b.y;
-    ret.z = a.z = b.z;
+    ret.x = a.x + b.x;
+    ret.y = a.y + b.y;
+    ret.z = a.z + b.z;
     return (ret);
+}
+
+t_vec   vec_num(t_vec vec, double num)
+{
+    t_vec ret;
+    
+    ret.x = vec.x * num;
+    ret.y = vec.y * num;
+    ret.z = vec.z * num;
+    return(ret);
 }
