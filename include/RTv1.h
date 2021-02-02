@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/01 20:44:10 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/02 11:38:48 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ typedef struct      s_vec
     double          z;
 }                   t_vec;
 
-typedef struct      s_vecs
+typedef struct      s_cam
 {
     t_vec           f;
     t_vec           r;
     t_vec           u;
-}                   t_vecs;
+}                   t_cam;
 
 typedef struct      s_color
 {
@@ -76,9 +76,9 @@ t_vec               vec_unit(t_vec vec);
 t_vec               vec_add(t_vec a, t_vec b);
 t_vec               vec_num(t_vec vec, double num);
 
-
-t_vecs                camera_matx(t_vec from, t_vec to);
-t_vec   camera_transform(t_vecs vecs, t_vec old_p, t_vec tr);
+void                render(t_color *colors);
+t_cam               cam_mx(t_vec from, t_vec to);
+t_vec               camera_transform(t_cam vecs, t_vec old_p, t_vec tr);
 
 
 
