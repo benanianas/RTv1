@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/02 11:38:48 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/04 15:15:33 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 typedef struct s_obj
 {
     int id;
+    int oneint;
     int **obj;
     struct s_obj	*next;
 	struct s_obj	*head;
@@ -79,6 +80,21 @@ t_vec               vec_num(t_vec vec, double num);
 void                render(t_color *colors);
 t_cam               cam_mx(t_vec from, t_vec to);
 t_vec               camera_transform(t_cam vecs, t_vec old_p, t_vec tr);
+
+int check_cam(char *tab, t_obj *obj);
+int check_light(char *tab, t_obj *obj);
+void delet_table(char **tab);
+char **nocomment(char **table);
+char **nospace_nocomment(char **table);
+char **file_reader(char **av, char **table);
+int parser(int ac, char **av, t_obj *object);
+int arr_counter(char **arr);
+void node_filler(int id, int *object, int objnum, int add, t_obj *obj);
+void first_node(t_obj *obj, int *object, int objnum);
+int check_sphere(char *tab, t_obj *obj);
+int check_plane(char *tab, t_obj *obj);
+int check_cone(char *tab, t_obj *obj);
+int check_cy(char *tab, t_obj *obj);
 
 
 

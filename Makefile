@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+         #
+#    By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/11 10:39:21 by abenani           #+#    #+#              #
-#    Updated: 2021/02/01 09:54:40 by abenani          ###   ########.fr        #
+#    Updated: 2021/02/04 15:15:00 by moel-aza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_D = srcs
 
 
 
-SRC_F = main.c sdltools.c vecs.c rendertools.c
+SRC_F = main.c sdltools.c vecs.c rendertools.c parser1.c parsercamlight.c
 SRC = $(addprefix srcs/, $(SRC_F))
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
