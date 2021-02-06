@@ -3,24 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   rendertools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/02 11:45:22 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/06 12:43:45 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/RTv1.h"
 
-void render(t_color *img_buff)
+
+t_vec   objvec(int *arr)
+{
+    t_vec vect;
+    
+    vect  = vec(arr[0], arr[1], arr[2]);
+    return vect;
+}
+
+void render(t_color *img_buff, t_obj *obj)
 {
     float i;
     float j;
+    float ratio;
     t_cam tr_vecs;
+    t_vec cam_pos;
+    t_vec look_at;
     
-    int w = W_WIDTH;
-    int h = W_HEIGHT;
-    float ratio = w / h;
     
     //to remove
     //*******//
@@ -31,18 +40,22 @@ void render(t_color *img_buff)
     test.a = 255;
     /////////////
 
-    // tr_vecs vecs = cam_mx(pos, look_at)
+    cam_pos = vec_add(objvec(obj->obj[0]), objvec(obj->obj[1]));
+    look_at = vec_add(objvec(obj->obj[2]), objvec(obj->obj[1]));
+    tr_vecs = cam_mx(cam_pos, look_at);
+    
 
+    ratio = W_WIDTH / W_HEIGHT;
     j = 0;
-    while (j < h)
+    while (j < W_HEIGHT)
     {
         i = 0;
-        while(i < w)
+        while(i < W_WIDTH)
         {
-            float x = (2*((i+.5)/w)-1) * ratio ; 
-            float y = 1-2*((j+.5)/h);
+            float x = (2*((i+.5)/W_WIDTH)-1) * ratio ; 
+            float y = 1-2*((j+.5)/W_HEIGHT);
             // printf("[%.4f , %.4f] ", x, y);
-            int num = w*j+i;
+            int num = W_WIDTH * j + i;
             img_buff[num] =  test;
             i++;
         }

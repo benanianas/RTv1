@@ -3,37 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/04 15:07:48 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/06 12:34:26 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/RTv1.h"
 
 
-int main(int ac, char **av)
+int main(int argc, char **argv)
 {
 
     t_obj *object;
-
-    object = (t_obj *)malloc(sizeof(t_obj));
-    if (!parser(ac,av,object))
-        perror("file ERROR :(");
-
-    
     t_sdl sdl;
     t_color *img_buff;
-    img_buff = malloc(W_WIDTH * W_HEIGHT * sizeof(t_color));
+
+    object = (t_obj *)malloc(sizeof(t_obj));
+    if (!parser(argc, argv, object))
+    {
+        perror("file ERROR :(");
+        exit (0);
+    }
+
+    
+    t_obj *obj = object;
+    
+    while(obj)
+    {
+        printf("%d\n", obj->oneint);
+        obj = obj->next;
+    }
+
+
+
    
+
+    img_buff = malloc(W_WIDTH * W_HEIGHT * sizeof(t_color));
     if(!startSdl(&sdl))
         exit (0);
-    render(img_buff);
-    draw(sdl.rend, img_buff);
-    while(1)
-        if(exitSdl(sdl))
-            break;
+    render(img_buff, object);
+    // draw(sdl.rend, img_buff);
+    // while(1)
+    //     if(exitSdl(sdl))
+    //         break;
             
     // t_vec point;
 

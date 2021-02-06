@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/04 15:15:33 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/06 12:38:21 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # include <math.h>
 # include "../libft/libft.h"
 
+# define W_WIDTH 800
+# define W_HEIGHT 500
+# define BUFF_SIZE 100
+
 typedef struct s_obj
 {
     int id;
@@ -30,17 +34,7 @@ typedef struct s_obj
     struct s_obj	*next;
 	struct s_obj	*head;
     
-}   t_obj;
-
-# define W_WIDTH 800
-# define W_HEIGHT 500
-# define BUFF_SIZE 100
-
-typedef struct      s_sdl
-{
-    SDL_Window      *win;
-    SDL_Renderer    *rend;
-}                   t_sdl;
+}               t_obj;
 
 typedef struct      s_vec
 {
@@ -48,6 +42,12 @@ typedef struct      s_vec
     double          y;
     double          z;
 }                   t_vec;
+
+typedef struct      s_sdl
+{
+    SDL_Window      *win;
+    SDL_Renderer    *rend;
+}                   t_sdl;
 
 typedef struct      s_cam
 {
@@ -77,24 +77,26 @@ t_vec               vec_unit(t_vec vec);
 t_vec               vec_add(t_vec a, t_vec b);
 t_vec               vec_num(t_vec vec, double num);
 
-void                render(t_color *colors);
+void                render(t_color *colors, t_obj *object);
 t_cam               cam_mx(t_vec from, t_vec to);
 t_vec               camera_transform(t_cam vecs, t_vec old_p, t_vec tr);
+t_vec               objvec(int *arr);
 
-int check_cam(char *tab, t_obj *obj);
-int check_light(char *tab, t_obj *obj);
-void delet_table(char **tab);
-char **nocomment(char **table);
-char **nospace_nocomment(char **table);
-char **file_reader(char **av, char **table);
-int parser(int ac, char **av, t_obj *object);
-int arr_counter(char **arr);
-void node_filler(int id, int *object, int objnum, int add, t_obj *obj);
-void first_node(t_obj *obj, int *object, int objnum);
-int check_sphere(char *tab, t_obj *obj);
-int check_plane(char *tab, t_obj *obj);
-int check_cone(char *tab, t_obj *obj);
-int check_cy(char *tab, t_obj *obj);
+int                 check_cam(char *tab, t_obj *obj);
+int                 check_light(char *tab, t_obj *obj);
+void                delet_table(char **tab);
+char                **nocomment(char **table);
+char                **nospace_nocomment(char **table);
+char                **file_reader(char **av, char **table);
+int                 parser(int ac, char **av, t_obj *object);
+int                 arr_counter(char **arr);
+void                node_filler(int id, int *object, int objnum, int add, t_obj *obj);
+void                first_node(t_obj *obj, int *object, int objnum);
+int                 check_sphere(char *tab, t_obj *obj);
+int                 check_plane(char *tab, t_obj *obj);
+int                 check_cone(char *tab, t_obj *obj);
+int                 check_cy(char *tab, t_obj *obj);
+
 
 
 
