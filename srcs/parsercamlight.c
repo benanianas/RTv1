@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsercamlight.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:09:29 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/04 15:09:35 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/06 14:58:55 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ int check_light(char *tab, t_obj *obj)
         if(arr_counter(param) != 1)
                 return (0);
         i = ft_atoi(param[1]);
-        node_filler(1, allnum, 3, 1, obj);
+        node_filler(1, allnum, 3, i, obj);
         return (1);
     }
     return (0);

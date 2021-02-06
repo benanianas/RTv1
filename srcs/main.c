@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/06 12:34:26 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/06 14:23:47 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
         obj = obj->next;
     }
 
-
+    
 
    
 
@@ -44,10 +44,10 @@ int main(int argc, char **argv)
     if(!startSdl(&sdl))
         exit (0);
     render(img_buff, object);
-    // draw(sdl.rend, img_buff);
-    // while(1)
-    //     if(exitSdl(sdl))
-    //         break;
+    draw(sdl.rend, img_buff);
+    while(1)
+        if(exitSdl(sdl))
+            break;
             
     // t_vec point;
 
