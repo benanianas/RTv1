@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:08:37 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/04 15:10:15 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/07 17:20:29 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ char **file_reader(char **av, char **table)
     file_str = "\0";
     if ((fd = open(av[1], 0)))
     {
+        if(fd == -1)
+            return(NULL);
         while ((i = read(fd, tmp, BUFF_SIZE)))
         {
             tmp[i] = '\0';
