@@ -2,3 +2,4 @@ srcs/*.o
 SDL2-2.0.12
 libft/*.o
 libft/libft.a
+.DS_Store

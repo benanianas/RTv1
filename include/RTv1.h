@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/06 12:38:21 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/07 16:22:57 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 # define W_HEIGHT 500
 # define BUFF_SIZE 100
 
-typedef struct s_obj
+typedef struct      s_obj
 {
-    int id;
-    int oneint;
-    int **obj;
+    int             id;
+    int             oneint;
+    int             **obj;
     struct s_obj	*next;
 	struct s_obj	*head;
     
-}               t_obj;
+}                   t_obj;
 
 typedef struct      s_vec
 {
@@ -54,6 +54,7 @@ typedef struct      s_cam
     t_vec           f;
     t_vec           r;
     t_vec           u;
+    t_vec           pos;
 }                   t_cam;
 
 typedef struct      s_color
@@ -79,8 +80,9 @@ t_vec               vec_num(t_vec vec, double num);
 
 void                render(t_color *colors, t_obj *object);
 t_cam               cam_mx(t_vec from, t_vec to);
-t_vec               camera_transform(t_cam vecs, t_vec old_p, t_vec tr);
+t_vec               camera_transform(t_cam cam, t_vec old_p);
 t_vec               objvec(int *arr);
+void                renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam);
 
 int                 check_cam(char *tab, t_obj *obj);
 int                 check_light(char *tab, t_obj *obj);

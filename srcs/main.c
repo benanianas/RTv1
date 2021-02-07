@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/06 14:23:47 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/07 15:11:32 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int main(int argc, char **argv)
     }
 
     
-    t_obj *obj = object;
+    // t_obj *obj = object;
     
-    while(obj)
-    {
-        printf("%d\n", obj->oneint);
-        obj = obj->next;
-    }
+    // while(obj)
+    // {
+    //     printf("%d\n", obj->oneint);
+    //     obj = obj->next;
+    // }
 
     
 
