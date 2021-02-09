@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/07 16:22:57 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/09 11:23:50 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ double              vec_magnitude(t_vec vec);
 t_vec               vec_unit(t_vec vec);
 t_vec               vec_add(t_vec a, t_vec b);
 t_vec               vec_num(t_vec vec, double num);
+t_vec               vec_sub(t_vec a, t_vec b);
+
 
 void                render(t_color *colors, t_obj *object);
 t_cam               cam_mx(t_vec from, t_vec to);

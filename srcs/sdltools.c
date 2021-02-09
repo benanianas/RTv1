@@ -6,13 +6,13 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:13:01 by abenani           #+#    #+#             */
-/*   Updated: 2021/01/29 13:45:12 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/09 11:23:54 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/RTv1.h"
 
-int    startSdl(t_sdl *sdl)
+int    startSdl(t_sdl *sdl)    
 {
     if(!SDL_Init(SDL_INIT_VIDEO))
     {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:08:37 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/07 17:20:29 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/09 10:20:30 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void delet_table(char **tab)
 {
     int i;
+
+    i = 0;
     while (tab[i])
     {
         ft_strdel(&tab[i]);

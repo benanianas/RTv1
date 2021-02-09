@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 11:25:34 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/01 12:40:07 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/09 10:47:34 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,16 @@ t_vec   vec_add(t_vec a, t_vec b)
     ret.x = a.x + b.x;
     ret.y = a.y + b.y;
     ret.z = a.z + b.z;
+    return (ret);
+}
+
+t_vec   vec_sub(t_vec a, t_vec b)
+{
+    t_vec ret;
+
+    ret.x = a.x - b.x;
+    ret.y = a.y - b.y;
+    ret.z = a.z - b.z;
     return (ret);
 }
 
