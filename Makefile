@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+         #
+#    By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/11 10:39:21 by abenani           #+#    #+#              #
-#    Updated: 2021/02/04 15:15:00 by moel-aza         ###   ########.fr        #
+#    Updated: 2021/02/09 13:20:49 by abenani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(SDL):
 		$(MAKE) -C $(SDLB)
 		$(MAKE) -C $(SDLB) install
 
-$(SRC_D)/%.o: %.c $(HDR_F)
+$(SRC_D)/%.o: $(SRC_D)%.c
 		$(CC) $(CFLAGS) -c $< -o $@
 clean:
 		rm -f $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/09 11:23:56 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/10 12:40:55 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,8 @@ int main(int argc, char **argv)
     if (!parser(argc, argv, object))
     {
         perror("file ERROR :(");
-        exit (0);
+        exit (0); 
     }
- 
- 
-    
-    // t_obj *obj = object;
-    
-    // while(obj)
-    // {
-    //     printf("%d\n", obj->oneint);
-    //     obj = obj->next;
-    // }
-
-    
- 
-     
- 
     img_buff = malloc(W_WIDTH * W_HEIGHT * sizeof(t_color));
     if(!startSdl(&sdl))
         exit (0);   

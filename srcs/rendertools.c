@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/09 11:23:44 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/10 13:31:54 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,46 +25,58 @@ void render(t_color *img_buff, t_obj *obj)
     look_at = vec_add(objvec(obj->obj[2]), objvec(obj->obj[1]));
     cam = cam_mx(cam_pos, look_at);
     renderer_loop(img_buff, obj, cam);
-
-    // t_vec new = camera_transform(cam, vec(0, 0, -1));
-    // printf("(%f,%f,%f)\n", cam.pos.x, cam.pos.y, cam.pos.z );
-    // printf("(%f,%f,%f)\n", new.x, new.y, new.z);
 }
 
-int         sphere(t_obj *sphere, t_vec org, t_vec dir)
+double      sphere(t_obj *sphere, t_vec org, t_vec dir)
 {
-    int rad = 1;
-    t_vec center = objvec(sphere->obj[0]);
-    t_vec x = vec_sub(org, center);
+    t_sphere sp;
+    t_eq sol;
+    double tmp;
 
-    double a = vec_dot(dir, dir);
-    double b = 2 * vec_dot(dir, x);
-    double c = vec_dot(x, x) - rad * rad;
-
-    double delta = b*b - 4*a*c;
-    if( delta >= 0)
-        return (1);
-    else
-        return (0);  
+    sp.rad = sphere->oneint;
+    sp.center = objvec(sphere->obj[0]);
+    sp.x = vec_sub(org, sp.center);
+    sp.t = -1;
+    sol.a = vec_dot(dir, dir);
+    sol.b = 2 * vec_dot(dir, sp.x);
+    sol.c = vec_dot(sp.x, sp.x) - sp.rad * sp.rad;
+    sol.delta = sol.b*sol.b - 4*sol.a*sol.c; 
+    
+    if(sol.delta == 0)
+        sp.t = -sol.b/2*sol.a;
+    else if( sol.delta > 0)
+    { 
+        sp.t = (-sol.b + sqrt(sol.delta))/2*sol.a;
+        tmp = (-sol.b - sqrt(sol.delta))/2*sol.a;
+        if(tmp > sp.t)
+            sp.t = tmp;
+    }
+    if(sp.t <= 0)
+        return 0;
+    return sp.t;
 }
 
 t_color     pixel_fill(t_obj *object, t_vec org, t_vec dir)
 {
-    t_color test = {0,0,0,255};
-    t_color color = {255, 0,0,255};
+    t_color black = {0,0,0,255};
     t_obj *obj = object;
+    double t = INFINITY;
+    double tmp;
+    t_obj  *theobj;
     
     while(obj)
     {
         if (obj->id == 2)
-        {
-            if(sphere(obj, org, dir))
-                return color;
-        }
+            if(tmp = sphere(obj, org, dir) && tmp < t)
+            {
+                t = tmp;
+                theobj = obj;
+            }
         obj = obj->next;
     }
-        
-    return test;
+    if(t < INFINITY)
+    return objcolor(theobj->obj[2]);
+    return black;
 }
 
 void    renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam)
@@ -75,7 +87,7 @@ void    renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam)
     int num;
     t_vec pt;
     
-    ratio = (float)W_WIDTH / W_HEIGHT;   
+    ratio = (float)W_WIDTH / W_HEIGHT;
     j = -1;
     while (++j < W_HEIGHT)
     { 
@@ -121,4 +133,16 @@ t_vec   objvec(int *arr)
     
     vect  = vec(arr[0], arr[1], arr[2]);
     return vect;
+}
+
+t_color     objcolor(int *arr)
+{
+    t_color col;
+    
+    col.r = arr[0];
+    col.g = arr[1];
+    col.b = arr[2];
+    col.a = 255;
+    
+    return col;
 }

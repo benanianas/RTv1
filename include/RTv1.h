@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/09 11:23:50 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/10 13:07:42 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,25 @@ typedef struct      s_color
     int             a;
 }                   t_color;
 
+typedef struct      s_sphere
+{
+    t_vec           center;
+    t_vec           x;
+    int             rad;
+    double          t;
+    double          tmp;
+    
+}                   t_sphere;
+
+typedef struct      s_eq
+{
+    double          a;
+    double          b;
+    double          c;
+    double          delta;
+}                   t_eq;
+
+
 int                 startSdl(t_sdl *sdl);
 int                 exitSdl(t_sdl sdl);
 void                draw(SDL_Renderer    *rend, t_color *colors);
@@ -84,6 +103,7 @@ void                render(t_color *colors, t_obj *object);
 t_cam               cam_mx(t_vec from, t_vec to);
 t_vec               camera_transform(t_cam cam, t_vec old_p);
 t_vec               objvec(int *arr);
+t_color             objcolor(int *arr);
 void                renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam);
 
 int                 check_cam(char *tab, t_obj *obj);
