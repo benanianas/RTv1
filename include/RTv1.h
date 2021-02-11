@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/10 13:07:42 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/11 16:14:31 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ typedef struct      s_sphere
     
 }                   t_sphere;
 
+typedef struct s_plane
+{
+    t_vec       point;
+    t_vec       nor;
+    double      t;
+}                   t_plane;
+
 typedef struct      s_eq
 {
     double          a;
@@ -105,6 +112,8 @@ t_vec               camera_transform(t_cam cam, t_vec old_p);
 t_vec               objvec(int *arr);
 t_color             objcolor(int *arr);
 void                renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam);
+double              plane(t_obj * plane, t_vec org, t_vec dir);
+
 
 int                 check_cam(char *tab, t_obj *obj);
 int                 check_light(char *tab, t_obj *obj);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendertools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/10 13:31:54 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/11 17:56:01 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ double      sphere(t_obj *sphere, t_vec org, t_vec dir)
     { 
         sp.t = (-sol.b + sqrt(sol.delta))/2*sol.a;
         tmp = (-sol.b - sqrt(sol.delta))/2*sol.a;
-        if(tmp > sp.t)
+        if(tmp < sp.t)
             sp.t = tmp;
     }
     if(sp.t <= 0)
@@ -64,18 +64,22 @@ t_color     pixel_fill(t_obj *object, t_vec org, t_vec dir)
     double tmp;
     t_obj  *theobj;
     
+    tmp = 0;
     while(obj)
     {
-        if (obj->id == 2)
-            if(tmp = sphere(obj, org, dir) && tmp < t)
-            {
-                t = tmp;
-                theobj = obj;
-            }
+        // if (obj->id == 2)
+        //     tmp = sphere(obj, org, dir);
+        if(obj->id == 3)
+            tmp = plane(obj, org, dir);
+        if(tmp > 0 && tmp < t)
+        {
+            t = tmp;
+            theobj = obj;
+        }
         obj = obj->next;
     }
     if(t < INFINITY)
-    return objcolor(theobj->obj[2]);
+        return objcolor(theobj->obj[2]);
     return black;
 }
 
