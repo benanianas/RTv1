@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendertools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/11 17:56:01 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/12 12:53:02 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,6 @@ void render(t_color *img_buff, t_obj *obj)
     renderer_loop(img_buff, obj, cam);
 }
 
-double      sphere(t_obj *sphere, t_vec org, t_vec dir)
-{
-    t_sphere sp;
-    t_eq sol;
-    double tmp;
-
-    sp.rad = sphere->oneint;
-    sp.center = objvec(sphere->obj[0]);
-    sp.x = vec_sub(org, sp.center);
-    sp.t = -1;
-    sol.a = vec_dot(dir, dir);
-    sol.b = 2 * vec_dot(dir, sp.x);
-    sol.c = vec_dot(sp.x, sp.x) - sp.rad * sp.rad;
-    sol.delta = sol.b*sol.b - 4*sol.a*sol.c; 
-    
-    if(sol.delta == 0)
-        sp.t = -sol.b/2*sol.a;
-    else if( sol.delta > 0)
-    { 
-        sp.t = (-sol.b + sqrt(sol.delta))/2*sol.a;
-        tmp = (-sol.b - sqrt(sol.delta))/2*sol.a;
-        if(tmp < sp.t)
-            sp.t = tmp;
-    }
-    if(sp.t <= 0)
-        return 0;
-    return sp.t;
-}
-
 t_color     pixel_fill(t_obj *object, t_vec org, t_vec dir)
 {
     t_color black = {0,0,0,255};
@@ -67,10 +38,12 @@ t_color     pixel_fill(t_obj *object, t_vec org, t_vec dir)
     tmp = 0;
     while(obj)
     {
-        // if (obj->id == 2)
-        //     tmp = sphere(obj, org, dir);
-        if(obj->id == 3)
+        if (obj->id == 2)
+            tmp = sphere(obj, org, dir);
+        else if(obj->id == 3)
             tmp = plane(obj, org, dir);
+        else if(obj->id == 5)
+            tmp = cylinder(obj, org, dir);
         if(tmp > 0 && tmp < t)
         {
             t = tmp;
@@ -98,8 +71,8 @@ void    renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam)
         i = -1;
         while(++i < W_WIDTH)
         {
-            float x = (2*((float)(i+.5)/W_WIDTH)-1) * ratio;
-            float y = 1-2*((float)(j+.5)/W_HEIGHT);
+            float x = ((2*((float)(i+.5)/W_WIDTH)-1) * ratio) * 2;
+            float y = (1-2*((float)(j+.5)/W_HEIGHT)) * 2;
             pt = camera_transform(cam, vec(x, y, -1));
             num = W_WIDTH * j + i;
             img_buff[num] =  pixel_fill(obj, cam.pos, vec_unit(vec_sub(pt, cam.pos)));
