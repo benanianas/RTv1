@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/12 12:48:57 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/13 11:52:47 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct      s_shape
     t_vec           x;
     t_vec           nrm;
     int             rad;
+    double          ang;
     double          t;
     double          tmp;
 }                   t_shape;
@@ -81,6 +82,13 @@ typedef struct s_plane
     t_vec       nor;
     double      t;
 }                   t_plane;
+typedef struct s_cone
+{
+    t_vec d;
+    t_vec v;
+    t_vec co;
+    double ang;
+}               t_cone;
 
 typedef struct      s_eq
 {
@@ -115,6 +123,7 @@ void                renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam);
 double              sphere(t_obj *sphere, t_vec org, t_vec dir);
 double              plane(t_obj * plane, t_vec org, t_vec dir);
 double              cylinder(t_obj *cylinder, t_vec org, t_vec dir);
+double              cone(t_obj * cone, t_vec org, t_vec dir);
 
 
 int                 check_cam(char *tab, t_obj *obj);
