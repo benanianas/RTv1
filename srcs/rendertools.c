@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/15 10:43:10 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/15 11:12:10 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_color     pixel_fill(t_obj *object, t_vec org, t_vec dir)
             tmp = plane(obj, org, dir);
         else if(obj->id == 5)
             tmp = cylinder(obj, org, dir);
+        else if(obj->id == 4)
+            tmp = cone(obj, org, dir);
         if(tmp > 0 && tmp < t)
         {
             t = tmp;
@@ -70,8 +72,8 @@ void    renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam)
         i = -1;
         while(++i < W_WIDTH)
         {
-            float x = ((2*((float)(i+.5)/W_WIDTH)-1) * ratio) * 2;
-            float y = (1-2*((float)(j+.5)/W_HEIGHT)) * 2;
+            float x = ((2*((float)(i+.5)/W_WIDTH)-1) * ratio);
+            float y = (1-2*((float)(j+.5)/W_HEIGHT));
             pt = camera_transform(cam, vec(x, y, -1));
             num = W_WIDTH * j + i;
             img_buff[num] =  pixel_fill(obj, cam.pos, vec_unit(vec_sub(pt, cam.pos)));

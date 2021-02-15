@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/15 11:10:42 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/15 11:17:52 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,7 @@ double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
     sol.a = vec_dot(dir, dir) - (vec_dot(dir, cyl.nrm) * vec_dot(dir, cyl.nrm));
     sol.b = 2 * (vec_dot(dir, cyl.x) - (vec_dot(dir, cyl.nrm) * vec_dot(cyl.x, cyl.nrm)));
     sol.c = vec_dot(cyl.x, cyl.x) - (vec_dot(cyl.x, cyl.nrm) * vec_dot(cyl.x, cyl.nrm)) - cyl.rad * cyl.rad;
-
-    
     sol.delta = sol.b * sol.b - 4 * sol.a * sol.c; 
-    
-  
     if( sol.delta > 0)
     { 
         cyl.t = (-sol.b + sqrt(sol.delta))/2 * sol.a;
@@ -112,4 +108,30 @@ double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
             cyl.t = tmp;
     }
     return cyl.t;
+}
+
+double cone(t_obj *cone, t_vec org, t_vec dir)
+{
+    t_shape cn;
+    t_eq sol;
+    double t1;
+    double anng;
+    
+    anng = (double)cone->oneint;
+    cn.t = 0;
+    cn.nrm = vec_unit(objvec(cone->obj[4])); // v
+    cn.ang = tan(anng * (PI / 360)); // k
+    cn.x = vec_sub(org, objvec(cone->obj[0])); //X
+    sol.a = vec_dot(dir,dir) - (1 + cn.ang * cn.ang) * vec_dot(dir,cn.nrm) * vec_dot(dir,cn.nrm);
+    sol.b = 2.0*(vec_dot(dir,cn.x) - (1 + cn.ang * cn.ang) * vec_dot(dir,cn.nrm) * vec_dot(cn.x,cn.nrm));
+    sol.c = vec_dot(cn.x,cn.x) - (1 + cn.ang * cn.ang) * vec_dot(cn.x,cn.nrm) * vec_dot(cn.x,cn.nrm);
+    sol.delta = sol.b * sol.b - (4.0 * sol.a * sol.c);
+    if(sol.delta > 0)
+    {
+        cn.t = (- sol.b - sqrt(sol.delta))/(2.0 * sol.a);
+        cn.tmp =  (- sol.b + sqrt(sol.delta))/(2.0 * sol.a);
+        if(cn.tmp < cn.t)
+            cn.t = cn.tmp;
+    }
+    return cn.t;
 }
