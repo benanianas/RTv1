@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/12 12:53:02 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/15 10:43:10 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void render(t_color *img_buff, t_obj *obj)
     t_vec look_at;
     
     
-    t_color test = {0,255,0,255};
     cam_pos = vec_add(objvec(obj->obj[0]), objvec(obj->obj[1]));
     look_at = vec_add(objvec(obj->obj[2]), objvec(obj->obj[1]));
     cam = cam_mx(cam_pos, look_at);
@@ -76,9 +75,7 @@ void    renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam)
             pt = camera_transform(cam, vec(x, y, -1));
             num = W_WIDTH * j + i;
             img_buff[num] =  pixel_fill(obj, cam.pos, vec_unit(vec_sub(pt, cam.pos)));
-            // printf("[%.4f , %.4f] ", x, y);
         }
-        // printf("*\n");
     }
 }
 
@@ -120,6 +117,5 @@ t_color     objcolor(int *arr)
     col.g = arr[1];
     col.b = arr[2];
     col.a = 255;
-    
     return col;
 }

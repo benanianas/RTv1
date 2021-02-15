@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/12 12:48:57 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/15 10:24:29 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define W_WIDTH 800
 # define W_HEIGHT 500
 # define BUFF_SIZE 100
+# define PI 3.14159265358979323846
 
 typedef struct      s_obj
 {
