@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/15 13:25:31 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/15 21:02:49 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,38 @@ void render(t_color *img_buff, t_obj *obj)
     look_at = vec_add(objvec(obj->obj[2]), objvec(obj->obj[1]));
     cam = cam_mx(cam_pos, look_at);
     renderer_loop(img_buff, obj, cam);
+}
+
+t_color     pixel_render(t_obj *obj, t_vec org, t_vec dir, double t)
+{
+    t_vec light;
+    t_color color;
+    t_vec nrm;
+    t_vec p;
+    t_vec l;
+    
+    light.x = 0;
+    light.y = -5;
+    light.z = 0;
+        
+        
+    p = vec_add(org, vec_num(dir, t));
+    l = vec_unit(vec_sub(light, p));
+    color = objcolor(obj->obj[2]) ;
+    if(obj->id == 2)
+        nrm = vec_unit(vec_sub(p, objvec(obj->obj[0])));
+    if(obj->id == 3)
+        nrm = vec_unit(objvec(obj->obj[4]));
+    double diff = vec_dot(nrm, l);
+    if(diff < 0)
+        diff = 0;
+    color.r *= diff; 
+    color.g *= diff; 
+    color.b *= diff; 
+
+
+
+    return (color);
 }
 
 t_color     pixel_fill(t_obj *object, t_vec org, t_vec dir)
@@ -54,26 +86,28 @@ t_color     pixel_fill(t_obj *object, t_vec org, t_vec dir)
     }
     
     if(t < INFINITY)
-    {
-        t_vec light;
-        light.x = -3;
-        light.y = 2;
-        light.z = 0;
-        t_color thec;
+        return pixel_render(theobj, org, dir, t);
+    
+    // {
+    //     t_vec light;
+    //     light.x = -3;
+    //     light.y = 2;
+    //     light.z = 0;
+    //     t_color thec;
         
-        t_vec p = vec_add(org, vec_num(dir, t));
-        t_vec l = vec_unit(vec_sub(light, p));
-        t_vec nrm = vec_unit(vec_sub(p, objvec(theobj->obj[0])));
-        thec = objcolor(theobj->obj[2]) ;
-        double diff = vec_dot(nrm, l);
-        if(diff < 0)
-            diff = 0;
-        thec.r *= diff; 
-        thec.g *= diff; 
-        thec.b *= diff; 
+    //     t_vec p = vec_add(org, vec_num(dir, t));
+    //     t_vec l = vec_unit(vec_sub(light, p));
+    //     t_vec nrm = vec_unit(vec_sub(p, objvec(theobj->obj[0])));
+    //     thec = objcolor(theobj->obj[2]) ;
+    //     double diff = vec_dot(nrm, l);
+    //     if(diff < 0)
+    //         diff = 0;
+    //     thec.r *= diff; 
+    //     thec.g *= diff; 
+    //     thec.b *= diff; 
 
-        return (thec);
-    }
+    //     return (thec);
+    // }
     return black;
 }
 
