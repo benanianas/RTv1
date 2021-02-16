@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/16 12:49:09 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/16 12:54:54 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,6 @@ typedef struct      s_color
     int             b;
     int             a;
 }                   t_color;
-
-typedef struct      s_intr
-{
-    double          t;
-    t_vec           n;  
-}                   t_intr;
 
 typedef struct      s_shape
 {
