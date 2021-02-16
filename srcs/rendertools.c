@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendertools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/16 12:42:59 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/16 19:17:54 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void    renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam)
         i = -1;
         while(++i < W_WIDTH)
         {
-            float x = ((2*((float)(i+.5)/W_WIDTH)-1) * ratio) * 2;
-            float y = (1-2*((float)(j+.5)/W_HEIGHT)) * 2;
+            float x = ((2*((float)(i+.5)/W_WIDTH)-1) * ratio);
+            float y = (1-2*((float)(j+.5)/W_HEIGHT));
             pt = camera_transform(cam, vec(x, y, -1));
             num = W_WIDTH * j + i;
             img_buff[num] =  pixel_fill(obj, cam.pos, vec_unit(vec_sub(pt, cam.pos)));
@@ -104,7 +104,7 @@ t_vec   camera_transform(t_cam cam, t_vec old_p)
     return (new_p);
 }
 
-t_vec   objvec(int *arr)
+t_vec   objvec(double *arr)
 {
     t_vec vect;
     
@@ -112,7 +112,7 @@ t_vec   objvec(int *arr)
     return vect;
 }
 
-t_color     objcolor(int *arr)
+t_color     objcolor(double *arr)
 {
     t_color col;
     

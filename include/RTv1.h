@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/16 12:54:54 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/16 19:07:11 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,23 @@
 # define BUFF_SIZE 100
 # define PI 3.14159265358979323846
 
-typedef struct      s_obj
-{
-    int             id;
-    int             oneint;
-    int             **obj;
-    struct s_obj	*next;
-	struct s_obj	*head;
-    
-}                   t_obj;
-
 typedef struct      s_vec
 {
     double          x;
     double          y;
     double          z;
 }                   t_vec;
+
+typedef struct      s_obj
+{
+    int             id;
+    int             oneint;
+    double          **obj;
+    struct s_obj	*next;
+	struct s_obj	*head;
+    struct s_vec     nrm;
+    
+}                   t_obj;
 
 typedef struct      s_sdl
 {
@@ -61,9 +62,9 @@ typedef struct      s_cam
 typedef struct      s_color
 {
     int             r;
-    int             g;
-    int             b;
-    int             a;
+    int            g;
+    int            b;
+    int            a;
 }                   t_color;
 
 typedef struct      s_shape
@@ -118,8 +119,8 @@ t_vec               vec_sub(t_vec a, t_vec b);
 void                render(t_color *colors, t_obj *object);
 t_cam               cam_mx(t_vec from, t_vec to);
 t_vec               camera_transform(t_cam cam, t_vec old_p);
-t_vec               objvec(int *arr);
-t_color             objcolor(int *arr);
+t_vec               objvec(double *arr);
+t_color             objcolor(double *arr);
 void                renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam);
 double              sphere(t_obj *sphere, t_vec org, t_vec dir);
 double              plane(t_obj * plane, t_vec org, t_vec dir);

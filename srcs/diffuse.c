@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   diffuse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 10:25:05 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/16 12:44:21 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/16 18:25:47 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_color     diffuse(t_obj *obj, t_vec org, t_vec dir, double t)
     if(obj->id == 3)
         nrm = plane_nrm(obj, org, dir);
     if(obj->id == 4)
-        nrm = cone_nrm(obj, org, dir, t, p);
+        return color;
     if(obj->id == 5)
         nrm = cylinder_nrm(obj, org, dir, t, p);
     double diff = vec_dot(nrm, l);

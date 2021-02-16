@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsercamlight.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:09:29 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/06 14:58:55 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/16 18:44:23 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void first_node(t_obj *obj, int *object, int objnum)
     j = 0;
     obj->id = 0;
     obj->oneint = 0;
-    obj->obj = malloc(sizeof(int *) * 3);
+    obj->obj = malloc(sizeof(double *) * 3);
     while(++i < 3)
-        obj->obj[i] = malloc(sizeof(int) * 3);
+        obj->obj[i] = malloc(sizeof(double) * 3);
     obj->next = NULL;
     obj->head = obj;
     while (c < objnum * 3)
@@ -64,9 +64,9 @@ void node_filler(int id, int *object, int objnum, int add, t_obj *obj)
         obj = obj->next;
         obj->id = id;
         obj->oneint = add;
-        obj->obj = malloc(sizeof(int *) * objnum);
+        obj->obj = malloc(sizeof(double *) * objnum);
         while(++i < objnum)
-            obj->obj[i] = malloc(sizeof(int) * 3);
+            obj->obj[i] = malloc(sizeof(double) * 3);
         obj->next = NULL;
         while(c < objnum * 3)
         {

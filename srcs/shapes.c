@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/16 13:03:23 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/16 19:07:38 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,22 @@ t_vec rotation(t_vec v,int *rot)
     t_vec ret;
 
     ang = vec_num(objvec(rot), (float)PI/180);
-    if(ang.z)
-    {
-        ret.x = v.x * cos(ang.z) - v.y * sin(ang.z);
-        ret.y = v.x * sin(ang.z) + v.y * cos(ang.z);
-        ret.z = v.z;
-        v = ret;
-    }
-    if(ang.y)
-    {
-        ret.x = v.x * cos(ang.y) + v.z * sin(ang.y);
-        ret.y = v.y;
-        ret.z = -v.x * sin(ang.y) + v.z * cos(ang.y);
-        v = ret;
-    }
-    if(ang.x)
-    {
-        ret.x = v.x;
-        ret.y = v.y * cos(ang.x) - v.z * sin(ang.x);
-        ret.z = v.y * sin(ang.x) + v.z * cos(ang.x);
-        v = ret;
-    }
+    ret.x = v.x * cos(ang.z) - v.y * sin(ang.z);
+    ret.y = v.x * sin(ang.z) + v.y * cos(ang.z);
+    ret.z = v.z;
+    v = ret;
+ 
+    ret.x = v.x * cos(ang.y) + v.z * sin(ang.y);
+    ret.y = v.y;
+    ret.z = -v.x * sin(ang.y) + v.z * cos(ang.y);
+    v = ret;
+
+
+    ret.x = v.x;
+    ret.y = v.y * cos(ang.x) - v.z * sin(ang.x);
+    ret.z = v.y * sin(ang.x) + v.z * cos(ang.x);
+    v = ret;
+   
     return ret; 
 }
 
@@ -90,8 +85,8 @@ double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
     cyl.rad = cylinder->oneint;
     cyl.pos = objvec(cylinder->obj[0]);
     cyl.x = vec_sub(org, cyl.pos);
-    // cyl.nrm = rotation(vec_unit(objvec(cylinder->obj[4])), cylinder->obj[3]);
-    cyl.nrm = vec_unit(objvec(cylinder->obj[4]));
+    cyl.nrm = rotation(vec_unit(objvec(cylinder->obj[4])), cylinder->obj[3]);
+    // cyl.nrm = vec_unit(objvec(cylinder->obj[4]));
     cyl.t = 0;
     sol.a = vec_dot(dir, dir) - (vec_dot(dir, cyl.nrm) * vec_dot(dir, cyl.nrm));
     sol.b = 2 * (vec_dot(dir, cyl.x) - (vec_dot(dir, cyl.nrm) * vec_dot(cyl.x, cyl.nrm)));
