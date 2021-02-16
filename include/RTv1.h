@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/15 11:13:18 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/16 12:49:09 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ typedef struct      s_color
     int             b;
     int             a;
 }                   t_color;
+
+typedef struct      s_intr
+{
+    double          t;
+    t_vec           n;  
+}                   t_intr;
 
 typedef struct      s_shape
 {
@@ -125,6 +131,8 @@ double              sphere(t_obj *sphere, t_vec org, t_vec dir);
 double              plane(t_obj * plane, t_vec org, t_vec dir);
 double              cylinder(t_obj *cylinder, t_vec org, t_vec dir);
 double              cone(t_obj * cone, t_vec org, t_vec dir);
+t_color             diffuse(t_obj *obj, t_vec org, t_vec dir, double t);
+
 
 
 int                 check_cam(char *tab, t_obj *obj);

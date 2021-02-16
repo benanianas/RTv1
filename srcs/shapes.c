@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/15 11:17:52 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/16 12:47:29 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ double      sphere(t_obj *sphere, t_vec org, t_vec dir)
     t_eq sol;
     double tmp;
 
+    sp.t = 0;
     sp.rad = sphere->oneint;
     sp.pos = objvec(sphere->obj[0]);
     sp.x = vec_sub(org, sp.pos);
@@ -40,18 +41,13 @@ double      sphere(t_obj *sphere, t_vec org, t_vec dir)
     sol.b = 2 * vec_dot(dir, sp.x);
     sol.c = vec_dot(sp.x, sp.x) - sp.rad * sp.rad;
     sol.delta = sol.b*sol.b - 4*sol.a*sol.c; 
-    
-    if(sol.delta == 0)
-        sp.t = -sol.b/2*sol.a;
-    else if( sol.delta > 0)
+    if( sol.delta > 0)
     { 
         sp.t = (-sol.b + sqrt(sol.delta))/2*sol.a;
         tmp = (-sol.b - sqrt(sol.delta))/2*sol.a;
         if(tmp < sp.t)
             sp.t = tmp;
     }
-    if(sp.t <= 0)
-        return 0;
     return sp.t;
 }
 
