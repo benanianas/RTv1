@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/17 12:20:17 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/17 12:29:42 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
     }
     return cyl.t;
 }
-int		ft_min_ray(float t1, float t2, float *t)
+int		min_ray(float t1, float t2, float *t)
 {
 	if (((t1 < t2 || t2 < 0.001) && t1 > 0.1) && (t1 < *t))
 	{
@@ -131,7 +131,7 @@ double cone(t_obj *cone, t_vec org, t_vec dir)
 	d.delta = sqrtf(d.delta);
 	d.t1 = (-d.b + d.delta) / (2 * d.a);
 	d.t2 = (-d.b - d.delta) / (2 * d.a);
-	return (ft_min_ray(d.t1, d.t2, &tmin));
+	return (min_ray(d.t1, d.t2, &tmin));
     
     // t_shape cn;
     // t_eq sol;
