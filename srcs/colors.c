@@ -109,14 +109,14 @@ t_color     light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
     t_vec h;
     t_vec c = vec_sub(org, p);
 
-    h = vec_unit(vec_add(c, l));
+    h = vec_unit(vec_add(vec_unit(c), vec_unit(l)));
     double spec = vec_dot(nrm, h);
     if(spec < 0)
         spec = 0;
-    spec = pow(spec, 64);
-    color.r *= (spec+diff); 
-    color.g *= (spec+diff); 
-    color.b *= (spec+diff); 
+    spec = pow(spec, 128);
+    color.r *= (spec*5+diff); 
+    color.g *= (spec*5+diff); 
+    color.b *= (spec*5+diff); 
     if (color.r > 255)
         color.r = 255;
     if (color.g > 255)
