@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendertools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/16 19:17:54 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/16 22:40:56 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_color     pixel_fill(t_obj *object, t_vec org, t_vec dir)
     }
     
     if(t < INFINITY)
-        return  diffuse(theobj, org, dir, t);
+        return  light_pixel(theobj, org, dir, t);
     return black;
 }
 
@@ -74,7 +74,7 @@ void    renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam)
         while(++i < W_WIDTH)
         {
             float x = ((2*((float)(i+.5)/W_WIDTH)-1) * ratio);
-            float y = (1-2*((float)(j+.5)/W_HEIGHT));
+            float y = (1-2*((float)(j+.5)/W_HEIGHT)) ;
             pt = camera_transform(cam, vec(x, y, -1));
             num = W_WIDTH * j + i;
             img_buff[num] =  pixel_fill(obj, cam.pos, vec_unit(vec_sub(pt, cam.pos)));

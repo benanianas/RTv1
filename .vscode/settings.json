@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "bitset": "c",
-        "random": "c"
+        "random": "c",
+        "__locale": "c",
+        "ios": "c"
     }
 }
