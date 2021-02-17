@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/17 12:20:02 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/17 15:05:31 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ double              plane(t_obj * plane, t_vec org, t_vec dir);
 double              cylinder(t_obj *cylinder, t_vec org, t_vec dir);
 double              cone(t_obj * cone, t_vec org, t_vec dir);
 t_color             light_pixel(t_obj *obj, t_vec org, t_vec dir, double t);
+double              *rotation(double *dir,double *rot);
 
 
 

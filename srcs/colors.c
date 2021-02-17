@@ -39,6 +39,18 @@ t_vec plane_nrm(t_obj *obj, t_vec org, t_vec dir)
 t_vec cone_nrm(t_obj *obj, t_vec org, t_vec dir, double t, t_vec p)
 {
     t_vec nrm;
+    t_vec c;
+    t_vec v;
+    t_vec x;
+    double k;
+    double m;
+
+    x = vec_sub(org, objvec(obj->obj[0]));
+    k = tan(obj->oneint * (PI / 360));
+    v = vec_unit(objvec(obj->obj[4]));
+    c = objvec(obj->obj[0]);
+    m = vec_dot(dir,vec_num(v, t)) + vec_dot(x,v);
+    nrm = vec_unit(vec_sub(vec_sub(p,c) , vec_num (vec_num(v,(1+k*k)), m)));
 
     return nrm;
 }
@@ -80,25 +92,36 @@ t_color     light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
     if(diff < 0)
         diff = 0;
     
-    color.r *= diff; 
-    color.g *= diff; 
-    color.b *= diff;
+    // color.r *= diff; 
+    // color.g *= diff; 
+    // color.b *= diff;
 
     //specular
 
-    // t_vec h;
-    // t_vec c = vec_sub(org, p);
+    t_vec h;
+    t_vec c = vec_sub(org, p);
 
-    // h = vec_unit(vec_add(c, l));
-    // double spec = vec_dot(nrm, h);
-    // if(spec < 0)
-    //     spec = 0;
-    // spec = pow(spec, 128);
-    // color.r *= spec; 
-    // color.g *= spec; 
-    // color.b *= spec; 
+    h = vec_unit(vec_add(c, l));
+    double spec = vec_dot(nrm, h);
+    if(spec < 0)
+        spec = 0;
+    spec = pow(spec, 64);
+    color.r *= (spec+diff); 
+    color.g *= (spec+diff); 
+    color.b *= (spec+diff); 
+    if (color.r > 255)
+        color.r = 255;
+    if (color.g > 255)
+        color.g = 255;
+    if (color.b > 255)
+        color.b = 255;
 
-
+        if (color.r < 0)
+        color.r = 0;
+    if (color.g < 0)
+        color.g = 0;
+    if (color.b < 0)
+        color.b = 0;
 
     return (color);
 }

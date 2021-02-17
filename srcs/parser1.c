@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:08:37 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/09 10:20:30 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/17 15:35:19 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,13 @@ char **file_reader(char **av, char **table)
     table = ft_strsplit(file_str, '\n');
     return table;
 }
+double *arr_add(double *pos, double *trs)
+{
+    pos[0] = pos[0] + trs[0];
+    pos[1] = pos[1] + trs[1];
+    pos[2] = pos[2] + trs[2];
+    return pos;
+}
 
 int parser(int ac, char **av, t_obj *object)
 {
@@ -142,6 +149,16 @@ int parser(int ac, char **av, t_obj *object)
             return(0);
         }
         i++;   
+    }
+    object = object->head;
+    while(object != NULL)
+    {
+        object->obj[0] = arr_add(object->obj[0],object->obj[1]);
+        if(object->id == 3 || object->id == 4 || object->id == 5)
+        {
+            object->obj[4] = rotation(object->obj[4],object->obj[3]);
+        }
+        object = object->next;
     }
     return (1);
 }

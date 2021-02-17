@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/17 12:20:17 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/17 16:53:35 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,14 @@ double      sphere(t_obj *sphere, t_vec org, t_vec dir)
     return sp.t;
 }
 
-t_vec rotation(t_vec v,double *rot)
+
+double *rotation(double *dir,double *rot)
 {
     t_vec ang;
     t_vec ret;
+    t_vec v;
 
+    v = objvec(dir);
     ang = vec_num(objvec(rot), (float)PI/180);
     ret.x = v.x * cos(ang.z) - v.y * sin(ang.z);
     ret.y = v.x * sin(ang.z) + v.y * cos(ang.z);
@@ -69,7 +72,10 @@ t_vec rotation(t_vec v,double *rot)
     ret.y = v.y * cos(ang.x) - v.z * sin(ang.x);
     ret.z = v.y * sin(ang.x) + v.z * cos(ang.x);
     v = ret;
-    return ret; 
+    dir[0] = ret.x;
+    dir[1] = ret.y;
+    dir[2] = ret.z;
+    return dir; 
 }
 
 double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
@@ -97,62 +103,37 @@ double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
     }
     return cyl.t;
 }
-int		ft_min_ray(float t1, float t2, float *t)
+double	ft_min_ray(double t1, double t2)
 {
-	if (((t1 < t2 || t2 < 0.001) && t1 > 0.1) && (t1 < *t))
-	{
-		*t = t1;
-		return (1);
-	}
-	else if (((t2 < t1 || t1 < 0.001) && t2 > 0.1) && (t2 < *t))
-	{
-		*t = t2;
-		return (1);
-	}
-	return (0);
+	if (((t1 < t2 || t2 < 0.001) && t1 > 0.1))
+		return (t1);
+	else if (((t2 < t1 || t1 < 0.001) && t2 > 0.1))
+    {
+		return (t2);
+    }
+    return 0;
 }
 
 double cone(t_obj *cone, t_vec org, t_vec dir)
 {
+     t_shape cn;
+    t_eq sol;
+    double anng;
     
-    t_eq	d;
-	float	c;
-    float tmin = INFINITY;
-	d.x = vec_sub(org, objvec(cone->obj[0]));
-	d.k = tanf(cone->oneint*M_PI/360);
-	d.a = vec_dot(dir, dir) - (1. + d.k * d.k) * \
-		powf(vec_dot(dir, objvec(cone->obj[4])), 2.);
-	d.b = 2.0 * (vec_dot(dir, d.x) - ((1. + d.k * d.k) * \
-				vec_dot(dir, objvec(cone->obj[4])) * vec_dot(d.x, objvec(cone->obj[4]))));
-	c = vec_dot(d.x, d.x) - (1. + d.k * d.k) * powf(vec_dot(d.x, objvec(cone->obj[4])), 2.);
-	d.delta = (d.b * d.b) - (4.0 * d.a * c);
-	if (d.delta < 0)
-		return (0);
-	d.delta = sqrtf(d.delta);
-	d.t1 = (-d.b + d.delta) / (2 * d.a);
-	d.t2 = (-d.b - d.delta) / (2 * d.a);
-	return (ft_min_ray(d.t1, d.t2, &tmin));
-    
-    // t_shape cn;
-    // t_eq sol;
-    // double t1;
-    // double anng;
-    
-    // anng = (double)cone->oneint;
-    // cn.t = 0;
-    // cn.nrm = vec_unit(objvec(cone->obj[4])); // v
-    // cn.ang = tan(anng * (PI / 360)); // k
-    // cn.x = vec_sub(org, objvec(cone->obj[0])); //X
-    // sol.a = vec_dot(dir,dir) - (1 + cn.ang * cn.ang) * vec_dot(dir,cn.nrm) * vec_dot(dir,cn.nrm);
-    // sol.b = 2.0*(vec_dot(dir,cn.x) - (1 + cn.ang * cn.ang) * vec_dot(dir,cn.nrm) * vec_dot(cn.x,cn.nrm));
-    // sol.c = vec_dot(cn.x,cn.x) - (1 + cn.ang * cn.ang) * vec_dot(cn.x,cn.nrm) * vec_dot(cn.x,cn.nrm);
-    // sol.delta = sol.b * sol.b - (4.0 * sol.a * sol.c);
-    // if(sol.delta > 0)
-    // {
-    //     cn.t = (- sol.b - sqrt(sol.delta))/(2.0 * sol.a);
-    //     cn.tmp =  (- sol.b + sqrt(sol.delta))/(2.0 * sol.a);
-    //     if(cn.tmp < cn.t)
-    //         cn.t = cn.tmp;
-    // }
-    // return cn.t;
+    anng = (double)cone->oneint;
+    cn.t = 0;
+    cn.nrm = vec_unit(objvec(cone->obj[4])); // v
+    cn.ang = tan(anng * (PI / 360)); // k
+    cn.x = vec_sub(org, objvec(cone->obj[0])); //X
+    sol.a = vec_dot(dir,dir) - (1 + cn.ang * cn.ang) * vec_dot(dir,cn.nrm) * vec_dot(dir,cn.nrm);
+    sol.b = 2.0*(vec_dot(dir,cn.x) - (1 + cn.ang * cn.ang) * vec_dot(dir,cn.nrm) * vec_dot(cn.x,cn.nrm));
+    sol.c = vec_dot(cn.x,cn.x) - (1 + cn.ang * cn.ang) * vec_dot(cn.x,cn.nrm) * vec_dot(cn.x,cn.nrm);
+    sol.delta = sol.b * sol.b - (4.0 * sol.a * sol.c);
+    if(sol.delta > 0)
+    {
+        cn.t = (- sol.b - sqrt(sol.delta))/(2.0 * sol.a);
+        cn.tmp =  (- sol.b + sqrt(sol.delta))/(2.0 * sol.a);
+        return (ft_min_ray(cn.t, cn.tmp));
+    }
+    return (0);
 }
