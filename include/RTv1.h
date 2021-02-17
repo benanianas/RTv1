@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/16 19:07:11 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/17 10:45:50 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ typedef struct      s_eq
     double          a;
     double          b;
     double          c;
+    struct s_vec x;
+    double k;
+    double t1;
+    double t2;
     double          delta;
 }                   t_eq;
 
