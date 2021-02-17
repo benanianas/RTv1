@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/17 16:53:35 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/17 18:14:26 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
     cyl.rad = cylinder->oneint;
     cyl.pos = objvec(cylinder->obj[0]);
     cyl.x = vec_sub(org, cyl.pos);
-    // cyl.nrm = rotation(vec_unit(objvec(cylinder->obj[4])), cylinder->obj[3]);
     cyl.nrm = vec_unit(objvec(cylinder->obj[4]));
     cyl.t = 0;
     sol.a = vec_dot(dir, dir) - (vec_dot(dir, cyl.nrm) * vec_dot(dir, cyl.nrm));

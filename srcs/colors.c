@@ -18,15 +18,15 @@ t_vec cylinder_nrm(t_obj *obj, t_vec org, t_vec dir, double t, t_vec p)
     t_vec v;
     t_vec x;
     t_vec c;
-    t_vec a;
+    t_vec nrm;
 
     v = vec_unit(objvec(obj->obj[4]));
     c =  objvec(obj->obj[0]);
-    x = vec_sub(org, c);
+    x = vec_sub(org, objvec(obj->obj[0]));
+    m = vec_dot(dir,vec_num(v, t)) + vec_dot(x,v);
 
-    m = vec_dot(dir, v) * t + vec_dot(x, v);
-    a = vec_add(c, vec_num(v, m));
-    return vec_unit(vec_sub(p,a));
+    nrm = vec_unit(vec_sub(vec_sub(p,c) ,vec_num(v,m)));
+    return nrm;
 }
 t_vec plane_nrm(t_obj *obj, t_vec org, t_vec dir)
 {
@@ -84,10 +84,18 @@ t_color     light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
 
     p = vec_add(org, vec_num(dir, t));
     l = vec_unit(vec_sub(light, p));
-       if(obj->id == 2)
+    if(obj->id == 2)
         nrm = vec_unit(vec_sub(p, objvec(obj->obj[0])));
-    if(obj->id == 3)
+    else if(obj->id == 3)
         nrm = plane_nrm(obj, org, dir);
+    else if(obj->id == 5)
+        nrm = cylinder_nrm(obj, org, dir, t, p);
+    else if(obj->id == 4)
+        nrm = cone_nrm(obj, org, dir, t, p);
+    else
+        return color;
+    
+    
     double diff = vec_dot(nrm, l)*(light_int / 170);
     if(diff < 0)
         diff = 0;
