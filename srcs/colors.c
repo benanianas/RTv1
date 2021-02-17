@@ -52,42 +52,53 @@ t_color     light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
     t_vec p;
     t_vec l;
     
-    int light_int = obj->head->next->oneint;
+    float light_int = obj->head->next->oneint;
     light_c = objcolor(obj->head->next->obj[2]);
     light = objvec(obj->head->next->obj[0]);
     color = objcolor(obj->obj[2]);
     
-    //anbient 
-    color.r = color.r ;//+ light_c.r;
-    color.g = color.g ;//+ light_c.g;
-    color.b = color.b ;//+ light_c.b;
-
-    //diffuse
+    //anbient
+    light_int = (light_int < 0) ? 0:light_int;
+    light_int = (light_int > 255) ? 255:light_int;
+    light_int = light_int;
     
+    color.a = light_int;
+    // light_int /= 1500;
+    color.r = 0.5 * color.r + (light_int / 1500) * light_c.r;
+    color.g = 0.5 * color.g + (light_int / 1500) * light_c.g;
+    color.b = 0.5 * color.b + (light_int / 1500) * light_c.b;
+
+    // diffuse
+
     p = vec_add(org, vec_num(dir, t));
     l = vec_unit(vec_sub(light, p));
        if(obj->id == 2)
         nrm = vec_unit(vec_sub(p, objvec(obj->obj[0])));
     if(obj->id == 3)
         nrm = plane_nrm(obj, org, dir);
-    double diff = vec_dot(nrm, l);
+    double diff = vec_dot(nrm, l)*(light_int / 170);
     if(diff < 0)
         diff = 0;
+    
     color.r *= diff; 
     color.g *= diff; 
     color.b *= diff;
 
     //specular
 
-    t_vec h;
-    t_vec c = vec_sub(org, p);
+    // t_vec h;
+    // t_vec c = vec_sub(org, p);
 
-    h = vec_unit(vec_add(c, l));
-    double spec = vec_dot(nrm, h);
-    if(spec < 0)
-        spec = 0;
-    color.r *= pow(spec, 66); 
-    color.g *= pow(spec, 66); 
-    color.b *= pow(spec,66); 
+    // h = vec_unit(vec_add(c, l));
+    // double spec = vec_dot(nrm, h);
+    // if(spec < 0)
+    //     spec = 0;
+    // spec = pow(spec, 128);
+    // color.r *= spec; 
+    // color.g *= spec; 
+    // color.b *= spec; 
+
+
+
     return (color);
 }

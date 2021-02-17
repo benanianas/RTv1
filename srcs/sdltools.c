@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdltools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:13:01 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/10 11:06:40 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/17 10:06:51 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void draw(SDL_Renderer    *rend, t_color *colors)
     int i;
     int j;
     
-    // SDL_SetRenderDrawBlendMode(rend, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawBlendMode(rend, SDL_BLENDMODE_BLEND);
     j = 0;
     while (j < W_HEIGHT)
     {
