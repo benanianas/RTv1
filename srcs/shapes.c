@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/18 16:35:21 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/18 18:09:00 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
     cyl.rad = cylinder->oneint;
     cyl.pos = objvec(cylinder->obj[0]);
     cyl.x = vec_sub(org, cyl.pos);
-    cyl.nrm = objvec(cylinder->obj[4]);
+    cyl.nrm = vec_unit(objvec(cylinder->obj[4]));
     cyl.t = 0;
     sol.a = vec_dot(dir, dir) - (vec_dot(dir, cyl.nrm) * vec_dot(dir, cyl.nrm));
     sol.b = 2.0 * (vec_dot(dir, cyl.x) - (vec_dot(dir, cyl.nrm) * vec_dot(cyl.x, cyl.nrm)));
