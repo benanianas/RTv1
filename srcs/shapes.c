@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/18 12:05:25 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/18 16:35:21 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,17 @@ double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
     cyl.rad = cylinder->oneint;
     cyl.pos = objvec(cylinder->obj[0]);
     cyl.x = vec_sub(org, cyl.pos);
-    cyl.nrm = vec_unit(objvec(cylinder->obj[4]));
+    cyl.nrm = objvec(cylinder->obj[4]);
     cyl.t = 0;
     sol.a = vec_dot(dir, dir) - (vec_dot(dir, cyl.nrm) * vec_dot(dir, cyl.nrm));
-    sol.b = 2 * (vec_dot(dir, cyl.x) - (vec_dot(dir, cyl.nrm) * vec_dot(cyl.x, cyl.nrm)));
-    sol.c = vec_dot(cyl.x, cyl.x) - (vec_dot(cyl.x, cyl.nrm) * vec_dot(cyl.x, cyl.nrm)) - cyl.rad * cyl.rad;
-    sol.delta = sol.b * sol.b - 4 * sol.a * sol.c; 
+    sol.b = 2.0 * (vec_dot(dir, cyl.x) - (vec_dot(dir, cyl.nrm) * vec_dot(cyl.x, cyl.nrm)));
+    sol.c = vec_dot(cyl.x, cyl.x) - (vec_dot(cyl.x, cyl.nrm) * vec_dot(cyl.x, cyl.nrm)) - (cyl.rad * cyl.rad);
+    sol.delta = sol.b * sol.b - (4.0 * sol.a * sol.c); 
     if( sol.delta > 0)
-    { 
-        cyl.t = (-sol.b + sqrt(sol.delta))/2 * sol.a;
-        tmp = (-sol.b - sqrt(sol.delta))/2 * sol.a;
-        if(tmp < cyl.t)
-            cyl.t = tmp;
+    {
+        cyl.t = (-sol.b + sqrt(sol.delta)) / (2 * sol.a);
+        tmp = (-sol.b - sqrt(sol.delta)) / (2 * sol.a);
+        cyl.t = ft_min_ray(cyl.t,  tmp);
     }
     return cyl.t;
 }

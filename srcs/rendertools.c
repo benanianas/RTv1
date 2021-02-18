@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendertools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/16 22:40:56 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/18 14:45:34 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_color     pixel_fill(t_obj *object, t_vec org, t_vec dir)
     }
     
     if(t < INFINITY)
-        return  light_pixel(theobj, org, dir, t);
+        return light_pixel(theobj, org, dir, t);
     return black;
 }
 
