@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/17 18:14:26 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/18 12:05:25 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ double      sphere(t_obj *sphere, t_vec org, t_vec dir)
     sol.delta = sol.b*sol.b - 4*sol.a*sol.c; 
     if( sol.delta > 0)
     { 
-        sp.t = (-sol.b + sqrt(sol.delta))/2*sol.a;
-        tmp = (-sol.b - sqrt(sol.delta))/2*sol.a;
+        sp.t = (-sol.b - sqrt(sol.delta))/2*sol.a;
+        tmp = (-sol.b + sqrt(sol.delta))/2*sol.a;
         if(tmp < sp.t)
             sp.t = tmp;
     }
