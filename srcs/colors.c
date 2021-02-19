@@ -65,20 +65,16 @@ int     pixel_shadow(t_obj *obj, t_vec p, t_vec light)
     light_dst =  vec_magnitude(vec_sub(light, p));
     t = light_dst;
     tmp = 0;
-    while(obj)
-    {
-        if (obj->id == 2)
-            tmp = sphere(obj, p, dir);
-        if(obj->id == 3)
-            tmp = plane(obj, p, dir);
-        else if(obj->id == 5)
-            tmp = cylinder(obj, p, dir);
-        else if(obj->id == 4)
-            tmp = cone(obj, p, dir);
-        if(tmp > 0 && tmp < t)
-            t = tmp;
-        obj = obj->next;
-    }
+    if (obj->id == 2)
+        tmp = sphere(obj, p, dir);
+    if(obj->id == 3)
+        tmp = plane(obj, p, dir);
+    else if(obj->id == 5)
+        tmp = cylinder(obj, p, dir);
+    else if(obj->id == 4)
+        tmp = cone(obj, p, dir);
+    if(tmp > 0 && tmp < t)
+        t = tmp;
     return (t < light_dst) ? 1:0;
 }
 
@@ -89,7 +85,7 @@ t_color     ambient_color(t_obj *obj)
     float light_int;
 
     light_int = obj->head->next->oneint;
-    light_int = (light_int < 0) ? 0:light_int; //********
+    light_int = (light_int < 0) ? 0:light_int;
     light_int = (light_int > 255) ? 255:light_int;
     color = objcolor(obj->obj[2]);
     light_c = objcolor(obj->head->next->obj[2]);
@@ -100,95 +96,81 @@ t_color     ambient_color(t_obj *obj)
     return color;
 }
 
-// double      diffuse_color(t_obj *obj, t_vec org, t_vec dir, double t)
-// {
-   
-// }
+double      diffuse_color(t_obj *obj, t_vec org, t_vec dir, t_light *lt)
+{
+
+    lt->diff = 0;
+    lt->p = vec_add(org, vec_num(dir, lt->t));
+    lt->l = vec_unit(vec_sub(lt->light, lt->p));
+    if(obj->id == 2)
+        lt->nrm = vec_unit(vec_sub(lt->p, objvec(obj->obj[0])));
+    if(obj->id == 3)
+        lt->nrm = plane_nrm(obj, org, dir);
+    if(obj->id == 5)
+        lt->nrm = cylinder_nrm(obj, org, dir, lt->t, lt->p);
+    if(obj->id == 4)
+        lt->nrm = cone_nrm(obj, org, dir, lt->t, lt->p);
+    lt->diff = vec_dot(lt->nrm, lt->l)*(lt->light_int / 170);
+    if(lt->diff < 0)
+        lt->diff = 0;
+    return lt->diff;
+}
+
+void light_helper(t_vec *light,float *light_int,t_color *color,t_obj *obj)
+{
+    *light = objvec(obj->head->next->obj[0]);
+    *light_int = obj->head->next->oneint;
+    *color = objcolor(obj->obj[2]);
+    *light_int = (*light_int < 0) ? 0:*light_int;
+    *light_int = (*light_int > 255) ? 255:*light_int;
+}
+
+void color_spec(t_light *lt, double spec)
+{
+    lt->color.r *= (spec*2+lt->diff); 
+    lt->color.g *= (spec*2+lt->diff); 
+    lt->color.b *= (spec*2+lt->diff); 
+    if (lt->color.r > 255)
+        lt->color.r = 255;
+    if (lt->color.g > 255)
+        lt->color.g = 255;
+    if (lt->color.b > 255)
+        lt->color.b = 255;
+    if (lt->color.r < 0)
+        lt->color.r = 0;
+    if (lt->color.g < 0)
+        lt->color.g = 0;
+    if (lt->color.b < 0)
+        lt->color.b = 0;
+}
 
 t_color     light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)  
 {
-    t_vec light;
-    t_color color;
-    float light_int;
-    t_vec nrm;
-    t_vec p;
-    t_vec l;
-    double diff;
+    t_light lt;
+    t_obj *lp;
+    double spec;
     
-    light = objvec(obj->head->next->obj[0]);
-    light_int = obj->head->next->oneint;
-    color = objcolor(obj->obj[2]);
-    light_int = (light_int < 0) ? 0:light_int;
-    light_int = (light_int > 255) ? 255:light_int;
-    
-    color = ambient_color(obj);
-
-    // diffuse
-
-    p = vec_add(org, vec_num(dir, t));
-    l = vec_unit(vec_sub(light, p));
-    if(obj->id == 2)
-        nrm = vec_unit(vec_sub(p, objvec(obj->obj[0])));
-    if(obj->id == 3)
-        nrm = plane_nrm(obj, org, dir);
-    if(obj->id == 5)
-        nrm = cylinder_nrm(obj, org, dir, t, p);
-    if(obj->id == 4)
-        nrm = cone_nrm(obj, org, dir, t, p);
-    
-    
-    diff = vec_dot(nrm, l)*(light_int / 170);
-    if(diff < 0)
-        diff = 0;
-  
-    // diff = diffuse_color(obj, org, dir, t);
-
-    //specular
-
-    t_vec h;
-    t_vec c = vec_sub(org, p);
-
-    h = vec_unit(vec_add(vec_unit(c), vec_unit(l)));
-    double spec = vec_dot(nrm, h);
+    lt.t = t;
+    light_helper(&lt.light,&lt.light_int,&lt.color,obj); 
+    lt.color = ambient_color(obj);
+    lt.diff = diffuse_color(obj, org, dir, &lt);
+    lt.c = vec_sub(org, lt.p);
+    lt.h = vec_unit(vec_add(vec_unit(lt.c), vec_unit(lt.l)));
+    spec = vec_dot(lt.nrm, lt.h);
     if(spec < 0)
         spec = 0;
-    
     spec = pow(spec, 64);
-    // spec = 0;
-  
-
-    t_obj *lp;
     lp = obj->head->next->next;
-
     while(lp)
     {
         if(lp != obj)
-        {
-            if(pixel_shadow(lp, p,light))
+            if(pixel_shadow(lp, lt.p,lt.light))
             {
-                color.a = 100;
+                lt.color.a = 100;
                 spec = 0;
             }
-        }
-            
         lp = lp->next;
     }
-    color.r *= (spec*2+diff); 
-    color.g *= (spec*2+diff); 
-    color.b *= (spec*2+diff); 
-
-      if (color.r > 255)
-        color.r = 255;
-    if (color.g > 255)
-        color.g = 255;
-    if (color.b > 255)
-        color.b = 255;
-
-        if (color.r < 0)
-        color.r = 0;
-    if (color.g < 0)
-        color.g = 0;
-    if (color.b < 0)
-        color.b = 0;
-    return (color);
+    color_spec(&lt, spec);
+    return (lt.color);
 }

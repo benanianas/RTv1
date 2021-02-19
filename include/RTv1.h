@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/19 12:46:07 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/19 15:30:27 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,20 @@ typedef struct s_cone
     t_vec co;
     double ang;
 }               t_cone;
+
+typedef struct s_light
+{
+    t_vec light;
+    t_color color;
+    float light_int;
+    t_vec nrm;
+    t_vec p;
+    t_vec l;
+    t_vec h;
+    t_vec c;
+    double diff;
+    double t;
+}   t_light;
 
 typedef struct      s_eq
 {

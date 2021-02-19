@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/19 11:40:19 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/19 17:46:41 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ double plane(t_obj * plane, t_vec org, t_vec dir)
     t_plane pl;
     double numone;
 
+    pl.t = 0;
     pl.point = vec_add(objvec(plane->obj[1]),objvec(plane->obj[0]));
     pl.nor = vec_unit(vec_add(objvec(plane->obj[3]) ,objvec(plane->obj[4])));
     if(vec_dot(dir,pl.nor) == 0)
