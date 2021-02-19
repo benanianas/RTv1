@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendertools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/18 14:45:34 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/19 09:11:30 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ void render(t_color *img_buff, t_obj *obj)
     renderer_loop(img_buff, obj, cam);
 }
 
-t_color     pixel_fill(t_obj *object, t_vec org, t_vec dir)
+t_color     pixel_fill(t_obj *obj, t_vec org, t_vec dir)
 {
     t_color black = {0,0,0,255};
-    t_obj *obj = object;
     double t = INFINITY;
     double tmp;
     t_obj  *theobj;

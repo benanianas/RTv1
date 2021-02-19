@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/18 16:13:53 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/19 09:14:56 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ int                 check_cone(char *tab, t_obj *obj);
 int                 check_cy(char *tab, t_obj *obj);
 
 
+int     pixel_shadow(t_obj *obj, t_vec org, t_vec dir);
 
 
 
