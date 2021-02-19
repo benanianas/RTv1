@@ -13,5 +13,5 @@ sphere : pos,0,0,-10 : trs,0,0,0 : col,255,0,0 : rad,4
 
 #plane : pos,0,-2,0 : trs,0,0,0 : col,255,255,0 : rot,0,0,0 : dir,1,1,0
 
-#cone : pos,0,25,-3 : trs,0,-25,0 : col,0,255,0 : rot,0,0,90 : dir,0,1,0 : ang,60
-#cylinder : pos,0,0,-7 : trs,0,0,0 : col,0,0,255 : rot,90,0,0 : dir,1,1,0 : rad,2
+cone : pos,2,0,-6 : trs,0,0,0 : col,0,255,0 : rot,0,0,0: dir,0,1,0 : ang,40
+#cylinder : pos,2,0,-6 : trs,0,0,0 : col,0,0,255 : rot,0,0,0 : dir,0,1,0 : rad,1
