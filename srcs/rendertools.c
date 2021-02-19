@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/19 09:11:30 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/19 12:15:18 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void    renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam)
         while(++i < W_WIDTH)
         {
             float x = ((2*((float)(i+.5)/W_WIDTH)-1) * ratio);
-            float y = (1-2*((float)(j+.5)/W_HEIGHT)) ;
+            float y = (1-2*((float)(j+.5)/W_HEIGHT));
             pt = camera_transform(cam, vec(x, y, -1));
             num = W_WIDTH * j + i;
             img_buff[num] =  pixel_fill(obj, cam.pos, vec_unit(vec_sub(pt, cam.pos)));

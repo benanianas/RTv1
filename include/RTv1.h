@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/19 09:14:56 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/19 12:46:07 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int                 check_cy(char *tab, t_obj *obj);
 
 
 int     pixel_shadow(t_obj *obj, t_vec org, t_vec dir);
+
 
 
 

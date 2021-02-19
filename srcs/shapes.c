@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/18 18:09:00 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/19 11:40:19 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
     {
         cyl.t = (-sol.b + sqrt(sol.delta)) / (2 * sol.a);
         tmp = (-sol.b - sqrt(sol.delta)) / (2 * sol.a);
-        cyl.t = ft_min_ray(cyl.t,  tmp);
+        if(tmp < cyl.t)
+            cyl.t = tmp;
     }
     return cyl.t;
 }
