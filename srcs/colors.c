@@ -72,10 +72,8 @@ t_color     light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
     //anbient
     light_int = (light_int < 0) ? 0:light_int;
     light_int = (light_int > 255) ? 255:light_int;
-    light_int = light_int;
     
     color.a = light_int;
-    // light_int /= 1500;
     color.r = 0.5 * color.r + (light_int / 1500) * light_c.r;
     color.g = 0.5 * color.g + (light_int / 1500) * light_c.g;
     color.b = 0.5 * color.b + (light_int / 1500) * light_c.b;
@@ -99,10 +97,7 @@ t_color     light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
     double diff = vec_dot(nrm, l)*(light_int / 170);
     if(diff < 0)
         diff = 0;
-    
-    // color.r *= diff; 
-    // color.g *= diff; 
-    // color.b *= diff;
+  
 
     //specular
 
@@ -119,7 +114,24 @@ t_color     light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
     color.r *= (spec*2+diff); 
     color.g *= (spec*2+diff); 
     color.b *= (spec*2+diff); 
-    if (color.r > 255)
+  
+
+    t_obj *lp;
+    lp = obj->head;
+
+    while(lp)
+    {
+        if(lp != obj)
+        {
+            if(pixel_shadow(lp, p,light))
+                color.a = 100;
+        }
+        lp = lp->next;
+    }
+
+
+
+      if (color.r > 255)
         color.r = 255;
     if (color.g > 255)
         color.g = 255;
@@ -132,6 +144,37 @@ t_color     light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
         color.g = 0;
     if (color.b < 0)
         color.b = 0;
-
     return (color);
+}
+
+int     pixel_shadow(t_obj *obj, t_vec org, t_vec light)
+{
+    double t = vec_magnitude(vec_sub(light, org));
+    double tmp;
+    t_obj  *theobj;
+    t_vec dir = vec_unit(vec_sub(light, org));
+    
+    tmp = 0;
+    while(obj)
+    {
+        if (obj->id == 2)
+            tmp = sphere(obj, org, dir);
+        else if(obj->id == 3)
+            tmp = plane(obj, org, dir);
+        else if(obj->id == 5)
+            tmp = cylinder(obj, org, dir);
+        else if(obj->id == 4)
+            tmp = cone(obj, org, dir);
+        if(tmp > 0 && tmp < t)
+        {
+            t = tmp;
+            theobj = obj;
+        }
+        obj = obj->next;
+    }
+    
+    if(t < vec_magnitude(vec_sub(light, org)))
+      return (1);
+    else
+        return (0);
 }
