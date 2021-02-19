@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:08:37 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/17 15:35:19 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/19 10:52:15 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,11 @@ char **file_reader(char **av, char **table)
             return(NULL);
         while ((i = read(fd, tmp, BUFF_SIZE)))
         {
+            if (i < 0)
+            {
+                perror("file error");
+                exit(0);
+            }
             tmp[i] = '\0';
             file_str = ft_strjoin(file_str, tmp);
         }
