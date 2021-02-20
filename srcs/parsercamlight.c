@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:09:29 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/20 11:48:37 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/20 15:20:57 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void first_node(t_obj *obj, int *object, int objnum)
     j = 0;
     obj->id = 0;
     obj->oneint = 0;
-    obj->obj = malloc(sizeof(double *) * 3);
+    obj->obj = malloc(sizeof(double *) * 4);
     while(++i < 3)
         obj->obj[i] = malloc(sizeof(double) * 3);
     obj->next = NULL;
@@ -41,6 +41,7 @@ void first_node(t_obj *obj, int *object, int objnum)
             j++;
             c++;
     }
+    obj->obj[3] = NULL;
 }
 void node_filler(int id, int *object, int objnum, int add, t_obj *obj)
 {   
@@ -64,7 +65,7 @@ void node_filler(int id, int *object, int objnum, int add, t_obj *obj)
         obj = obj->next;
         obj->id = id;
         obj->oneint = add;
-        obj->obj = malloc(sizeof(double *) * objnum);
+        obj->obj = malloc(sizeof(double *) * objnum + 1);
         while(++i < objnum)
             obj->obj[i] = malloc(sizeof(double) * 3);
         obj->next = NULL;
@@ -80,6 +81,7 @@ void node_filler(int id, int *object, int objnum, int add, t_obj *obj)
             c++;
         }
     }
+    obj->obj[objnum] = NULL;
 }
 
 int arr_counter(char **arr, int flag)

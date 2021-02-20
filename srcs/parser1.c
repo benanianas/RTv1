@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:08:37 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/20 11:49:01 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/20 15:17:52 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char **nospace_nocomment(char **table)
         tmp2 = table[i];
         table[i] = ft_strdup(tmp);
         free(tmp);
-        //free(tmp2);
+        free(tmp2);
         i++;
     }
     return (table);

@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/20 11:40:17 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/20 14:53:48 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,19 @@ typedef struct      s_eq
     double          delta;
 }                   t_eq;
 
+typedef struct      s_rlp
+{
+    int             i;
+    int             j;
+    int             c_num;
+    float           ratio;
+    float           x;
+    float           y;
+}                   t_rlp;
 
-int                 startSdl(t_sdl *sdl);
-int                 exitSdl(t_sdl sdl);
+
+int                 startsdl(t_sdl *sdl);
+int                 exitsdl(t_sdl sdl);
 void                draw(SDL_Renderer    *rend, t_color *colors);
 
 

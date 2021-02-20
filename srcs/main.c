@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/20 11:17:32 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/20 15:21:07 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/RTv1.h"
+
+void free_object(t_obj	*object)
+{
+	int i;
+	int j;
+	t_obj	*object2;
+	
+	i = 0;
+	object = object->head;
+	while (object != NULL)
+	{
+		while(object->obj[i])
+		{
+			free(object->obj[i]);
+			i++;
+		}
+		free(object->obj);
+		object2 = object;
+		object = object->next;
+		free(object2);
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -28,6 +50,7 @@ int	main(int argc, char **argv)
 	if (!startsdl(&sdl))
 		exit(0);
 	render(img_buff, object);
+	free_object(object);
 	draw(sdl.rend, img_buff);
 	while (1)
 		if (exitsdl(sdl))
