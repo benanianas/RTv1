@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/19 17:46:41 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/20 10:26:10 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,11 @@ double cylinder(t_obj *cylinder, t_vec org, t_vec dir)
     }
     return cyl.t;
 }
-double	ft_min_ray(double t1, double t2)
+double	min_ray(double t1, double t2)
 {
-	if (((t1 < t2 || t2 < 0.001) && t1 > 0.1))
+	if (((t1 < t2 || t2 < 0.1) && t1 > 0.1))
 		return (t1);
-	else if (((t2 < t1 || t1 < 0.001) && t2 > 0.1))
+	else if (((t2 < t1 || t1 < 0.1) && t2 > 0.1))
     {
 		return (t2);
     }
@@ -122,9 +122,9 @@ double cone(t_obj *cone, t_vec org, t_vec dir)
     
     anng = (double)cone->oneint;
     cn.t = 0;
-    cn.nrm = vec_unit(objvec(cone->obj[4])); // v
-    cn.ang = tan(anng * (PI / 360)); // k
-    cn.x = vec_sub(org, objvec(cone->obj[0])); //X
+    cn.nrm = vec_unit(objvec(cone->obj[4]));
+    cn.ang = tan(anng * (PI / 360));
+    cn.x = vec_sub(org, objvec(cone->obj[0]));
     sol.a = vec_dot(dir,dir) - (1 + cn.ang * cn.ang) * vec_dot(dir,cn.nrm) * vec_dot(dir,cn.nrm);
     sol.b = 2.0*(vec_dot(dir,cn.x) - (1 + cn.ang * cn.ang) * vec_dot(dir,cn.nrm) * vec_dot(cn.x,cn.nrm));
     sol.c = vec_dot(cn.x,cn.x) - (1 + cn.ang * cn.ang) * vec_dot(cn.x,cn.nrm) * vec_dot(cn.x,cn.nrm);
@@ -133,7 +133,7 @@ double cone(t_obj *cone, t_vec org, t_vec dir)
     {
         cn.t = (- sol.b - sqrt(sol.delta))/(2.0 * sol.a);
         cn.tmp =  (- sol.b + sqrt(sol.delta))/(2.0 * sol.a);
-        return (ft_min_ray(cn.t, cn.tmp));
+        return (min_ray(cn.t, cn.tmp));
     }
     return (0);
 }

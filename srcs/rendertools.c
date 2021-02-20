@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/19 12:15:18 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/20 10:39:07 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,14 @@ void    renderer_loop(t_color *img_buff, t_obj *obj, t_cam cam)
 t_cam  cam_mx(t_vec from, t_vec to)
 {
     t_cam vecs;
+    double check;
 
     vecs.f = vec_unit(vec_add(from, vec_num(to, -1)));
-    vecs.r = vec_unit(vec_cross(vec(0, 1, 0), vecs.f)); // (0, 1, 0) it will cause a problem (in case they are Parallel)
+    check = vec_dot(vec_unit(vec(0, 1, 0)), vecs.f);
+    if(check == 1 || check == -1)
+        vecs.r = vec_unit(vec_cross(vec(0, 1, 1), vecs.f));
+    else
+        vecs.r = vec_unit(vec_cross(vec(0, 1, 0), vecs.f));
     vecs.u = vec_unit(vec_cross(vecs.f, vecs.r));
     vecs.pos = from;
     return vecs;
