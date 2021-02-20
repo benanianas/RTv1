@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/20 10:08:24 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/20 11:40:17 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ char                **nocomment(char **table);
 char                **nospace_nocomment(char **table);
 char                **file_reader(char **av, char **table);
 int                 parser(int ac, char **av, t_obj *object);
-int                 arr_counter(char **arr);
+int                 arr_counter(char **arr, int flag);
 void                node_filler(int id, int *object, int objnum, int add, t_obj *obj);
 void                first_node(t_obj *obj, int *object, int objnum);
 int                 check_sphere(char *tab, t_obj *obj);

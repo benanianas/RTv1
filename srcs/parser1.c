@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:08:37 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/19 10:52:15 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/20 11:49:01 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,16 +143,11 @@ int parser(int ac, char **av, t_obj *object)
     table = nospace_nocomment(table);
     int t = -1;
     if (!check_cam(table[0], object) || !check_light(table[1], object))
-    {
-        printf("bro\n");
         return(0);
-    }
     while(table[i])
     {
         if(!check_sphere(table[i], object) && !check_plane(table[i], object) && !check_cone(table[i], object) && !check_cy(table[i], object))
-        {
             return(0);
-        }
         i++;   
     }
     object = object->head;

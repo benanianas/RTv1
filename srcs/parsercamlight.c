@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:09:29 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/16 18:44:23 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/20 11:48:37 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void node_filler(int id, int *object, int objnum, int add, t_obj *obj)
     }
 }
 
-int arr_counter(char **arr)
+int arr_counter(char **arr, int flag)
 {
     int i;
     int j;
@@ -94,12 +94,17 @@ int arr_counter(char **arr)
     {
         while(arr[i])
         {
-            j = 0;
-            while(arr[i][j])
+            if (flag == 1)
             {
-                if(arr[i][j] < '0' && arr[i][j] > '9' && arr[i][j] != '-')
-                    return (0);
-                j++;
+                j = 0;
+                while(arr[i][j])
+                {
+                    if(j == 0 && arr[i][j] == '-')
+                        j++;
+                    if(arr[i][j] < '0' || arr[i][j] > '9')
+                        return (0);
+                    j++;
+                }
             }
             i++;
         }
@@ -117,16 +122,16 @@ int check_cam(char *tab, t_obj *obj)
     
     i = 1;
     j = 0;
-    if ((ft_strncmp("cam", tab, 2) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
+    if ((ft_strncmp("cam", tab, 3) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
         return (0);
-    if (arr_counter(object) == 3)
+    if (arr_counter(object,0) == 3)
     {
-        if ((ft_strncmp("pos", object[1], 2)) || (ft_strncmp("trs", object[2], 2)) || (ft_strncmp("dir", object[3], 2)))
+        if ((ft_strncmp("pos", object[1], 3)) || (ft_strncmp("trs", object[2], 3)) || (ft_strncmp("dir", object[3], 3)))
             return (0);
         while(object[i])
         {
             param = ft_strsplit(object[i], ',');
-            if(arr_counter(param) != 3)
+            if(arr_counter(param,1) != 3)
                 return (0);
             allnum[j] = ft_atoi(param[1]);
             allnum[j+1] = ft_atoi(param[2]);
@@ -150,16 +155,16 @@ int check_light(char *tab, t_obj *obj)
     
     i = 1;
     j = 0;
-    if ((ft_strncmp("light", tab, 4) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
+    if ((ft_strncmp("light", tab, 5) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
         return (0);
-    if (arr_counter(object) == 4)
+    if (arr_counter(object,0) == 4)
     {
-        if ((ft_strncmp("pos", object[1], 2)) || (ft_strncmp("trs", object[2], 2)) || (ft_strncmp("col", object[3], 2)) || (ft_strncmp("int", object[4], 2)))
+        if ((ft_strncmp("pos", object[1], 3)) || (ft_strncmp("trs", object[2], 3)) || (ft_strncmp("col", object[3], 3)) || (ft_strncmp("int", object[4], 3)))
             return (0);
         while(i < 4)
         {
             param = ft_strsplit(object[i], ',');
-            if(arr_counter(param) != 3)
+            if(arr_counter(param,1) != 3)
                 return (0);
             allnum[j] = ft_atoi(param[1]);
             allnum[j+1] = ft_atoi(param[2]);
@@ -168,7 +173,7 @@ int check_light(char *tab, t_obj *obj)
             j += 3;
         }
         param = ft_strsplit(object[i], ',');
-        if(arr_counter(param) != 1)
+        if(arr_counter(param,1) != 1)
                 return (0);
         i = ft_atoi(param[1]);
         node_filler(1, allnum, 3, i, obj);
@@ -187,16 +192,16 @@ int check_sphere(char *tab, t_obj *obj)
     
     i = 1;
     j = 0;
-    if ((ft_strncmp("sphere", tab, 5) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
+    if ((ft_strncmp("sphere", tab, 6) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
         return (0);
-    if (arr_counter(object) == 4)
+    if (arr_counter(object,0) == 4)
     {
-        if ((ft_strncmp("pos", object[1], 2)) || (ft_strncmp("trs", object[2], 2)) || (ft_strncmp("col", object[3], 2)) || (ft_strncmp("rad", object[4], 2)))
+        if ((ft_strncmp("pos", object[1], 3)) || (ft_strncmp("trs", object[2], 3)) || (ft_strncmp("col", object[3], 3)) || (ft_strncmp("rad", object[4], 3)))
             return (0);
         while(i < 4)
         {
             param = ft_strsplit(object[i], ',');
-            if(arr_counter(param) != 3)
+            if(arr_counter(param,1) != 3)
                 return (0);
             allnum[j] = ft_atoi(param[1]);
             allnum[j+1] = ft_atoi(param[2]);
@@ -205,7 +210,7 @@ int check_sphere(char *tab, t_obj *obj)
             j += 3;
         }
         param = ft_strsplit(object[i], ',');
-        if(arr_counter(param) != 1)
+        if(arr_counter(param,1) != 1)
                 return (0);
         i = ft_atoi(param[1]);
         node_filler(2, allnum, 3, i, obj);
@@ -225,16 +230,16 @@ int check_plane(char *tab, t_obj *obj)
     
     i = 1;
     j = 0;
-    if ((ft_strncmp("plane", tab, 4) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
+    if ((ft_strncmp("plane", tab, 5) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
         return (0);
-    if (arr_counter(object) == 5)
+    if (arr_counter(object,0) == 5)
     {
-        if ((ft_strncmp("pos", object[1], 2)) || (ft_strncmp("trs", object[2], 2)) || (ft_strncmp("col", object[3], 2)) || (ft_strncmp("rot", object[4], 2)) || (ft_strncmp("dir", object[5], 2)))
+        if ((ft_strncmp("pos", object[1], 3)) || (ft_strncmp("trs", object[2], 3)) || (ft_strncmp("col", object[3], 3)) || (ft_strncmp("rot", object[4], 3)) || (ft_strncmp("dir", object[5], 3)))
             return (0);
         while(i < 6)
         {
             param = ft_strsplit(object[i], ',');
-            if(arr_counter(param) != 3)
+            if(arr_counter(param,1) != 3)
                 return (0);
             allnum[j] = ft_atoi(param[1]);
             allnum[j+1] = ft_atoi(param[2]);
@@ -258,16 +263,16 @@ int check_cone(char *tab, t_obj *obj)
     
     i = 1;
     j = 0;
-    if ((ft_strncmp("cone", tab, 3) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
+    if ((ft_strncmp("cone", tab, 4) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
         return (0);
-    if (arr_counter(object) == 6)
+    if (arr_counter(object,0) == 6)
     {
-        if ((ft_strncmp("pos", object[1], 2)) || (ft_strncmp("trs", object[2], 2)) || (ft_strncmp("col", object[3], 2)) || (ft_strncmp("rot", object[4], 2)) || (ft_strncmp("dir", object[5], 2)) || (ft_strncmp("ang", object[6], 2)))
+        if ((ft_strncmp("pos", object[1], 3)) || (ft_strncmp("trs", object[2], 3)) || (ft_strncmp("col", object[3], 3)) || (ft_strncmp("rot", object[4], 3)) || (ft_strncmp("dir", object[5], 3)) || (ft_strncmp("ang", object[6], 3)))
             return (0);
         while(i < 6)
         {
             param = ft_strsplit(object[i], ',');
-            if(arr_counter(param) != 3)
+            if(arr_counter(param,1) != 3)
                 return (0);
             allnum[j] = ft_atoi(param[1]);
             allnum[j+1] = ft_atoi(param[2]);
@@ -276,9 +281,11 @@ int check_cone(char *tab, t_obj *obj)
             j += 3;
         }
         param = ft_strsplit(object[i], ',');
-        if(arr_counter(param) != 1)
+        if(arr_counter(param,1) != 1)
                 return (0);
         i = ft_atoi(param[1]);
+        if(i == 180)
+            i = 0;
         node_filler(4, allnum, 5, i, obj);
         return (1);
     }
@@ -296,16 +303,16 @@ int check_cy(char *tab, t_obj *obj)
     
     i = 1;
     j = 0;
-    if ((ft_strncmp("cylinder", tab, 7) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
+    if ((ft_strncmp("cylinder", tab, 8) != 0) || !(object = ft_strsplit(tab, ':')) || object[0] == NULL)
         return (0);
-    if (arr_counter(object) == 6)
+    if (arr_counter(object,0) == 6)
     {
-        if ((ft_strncmp("pos", object[1], 2)) || (ft_strncmp("trs", object[2], 2)) || (ft_strncmp("col", object[3], 2)) || (ft_strncmp("rot", object[4], 2)) || (ft_strncmp("dir", object[5], 2)) || (ft_strncmp("rad", object[6], 2)))
+        if ((ft_strncmp("pos", object[1], 3)) || (ft_strncmp("trs", object[2], 3)) || (ft_strncmp("col", object[3], 3)) || (ft_strncmp("rot", object[4], 3)) || (ft_strncmp("dir", object[5], 3)) || (ft_strncmp("rad", object[6], 3)))
             return (0);
         while(i < 6)
         {
             param = ft_strsplit(object[i], ',');
-            if(arr_counter(param) != 3)
+            if(arr_counter(param,1) != 3)
                 return (0);
             allnum[j] = ft_atoi(param[1]);
             allnum[j+1] = ft_atoi(param[2]);
@@ -314,7 +321,7 @@ int check_cy(char *tab, t_obj *obj)
             j += 3;
         }
         param = ft_strsplit(object[i], ',');
-        if(arr_counter(param) != 1)
+        if(arr_counter(param,1) != 1)
                 return (0);
         i = ft_atoi(param[1]);
         node_filler(5, allnum, 5, i, obj);
