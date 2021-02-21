@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/21 17:33:46 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/21 18:40:33 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@
 # include "../SDL2-2.0.12/build/include/SDL2/SDL.h"
 # include <math.h>
 # include "../libft/libft.h"
-
 # define W_WIDTH 750
 # define W_HEIGHT 500
 # define BUFF_SIZE 100
-# define PI 3.1415926535897
 
 typedef struct      s_node
 {

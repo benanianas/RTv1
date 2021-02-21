@@ -1,176 +1,174 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                          :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/16 10:25:05 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/16 23:38:00 by abenani          ###   ########.fr       */
+/*   Created: 2021/02/21 18:18:31 by abenani           #+#    #+#             */
+/*   Updated: 2021/02/21 18:40:01 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/RTv1.h"
 
-t_vec cylinder_nrm(t_obj *obj, t_vec org, t_vec dir, double t, t_vec p)
+t_vec	cylinder_nrm(t_obj *obj, t_vec org, t_vec dir, double t, t_vec p)
 {
-    t_vec v;
-    t_vec c;
-    t_vec x;
-    double m;
+	t_vec	v;
+	t_vec	c;
+	t_vec	x;
+	double	m;
 
-    v = vec_unit(objvec(obj->obj[4]));
-    c = objvec(obj->obj[0]);
-    x = vec_sub(org, c);
-    m = vec_dot(vec_unit(dir), v) * t + vec_dot(x, v);
-    return (vec_unit(vec_sub(p, vec_add(c, vec_num(v, m)))));
+	v = vec_unit(objvec(obj->obj[4]));
+	c = objvec(obj->obj[0]);
+	x = vec_sub(org, c);
+	m = vec_dot(vec_unit(dir), v) * t + vec_dot(x, v);
+	return (vec_unit(vec_sub(p, vec_add(c, vec_num(v, m)))));
 }
 
-t_vec plane_nrm(t_obj *obj, t_vec dir)
+t_vec	plane_nrm(t_obj *obj, t_vec dir)
 {
-    t_vec nrm;
+	t_vec nrm;
 
-    nrm = vec_unit(objvec(obj->obj[4]));
-    if(vec_dot(dir, nrm) > 0)
-        nrm = vec_num(nrm, -1);
-    return nrm;
+	nrm = vec_unit(objvec(obj->obj[4]));
+	if (vec_dot(dir, nrm) > 0)
+		nrm = vec_num(nrm, -1);
+	return (nrm);
 }
 
-t_vec cone_nrm(t_obj *obj, t_vec org, t_vec dir, double t, t_vec p)
+t_vec	cone_nrm(t_obj *obj, t_vec org, t_vec dir, double t, t_vec p)
 {
-    t_vec nrm;
-    t_vec c;
-    t_vec v;
-    t_vec x;
-    double k;
-    double m;
+	t_vec	nrm;
+	t_vec	c;
+	t_vec	v;
+	t_vec	x;
+	double	k;
+	double	m;
 
-    x = vec_sub(org, objvec(obj->obj[0]));
-    k = tan(obj->oneint * (PI / 360));
-    v = vec_unit(objvec(obj->obj[4]));
-    c = objvec(obj->obj[0]);
-    m = vec_dot(dir,vec_num(v, t)) + vec_dot(x,v);
-    nrm = vec_unit(vec_sub(vec_sub(p,c) , vec_num (vec_num(v,(1+k*k)), m)));
-    return nrm;
+	x = vec_sub(org, objvec(obj->obj[0]));
+	k = tan(obj->oneint * (M_PI / 360));
+	v = vec_unit(objvec(obj->obj[4]));
+	c = objvec(obj->obj[0]);
+	m = vec_dot(dir, vec_num(v, t)) + vec_dot(x, v);
+	nrm = vec_unit(vec_sub(vec_sub(p, c),
+				vec_num(vec_num(v, (1 + k * k)), m)));
+	return (nrm);
 }
 
-int     pixel_shadow(t_obj *obj, t_vec p, t_vec light)
+int		pixel_shadow(t_obj *obj, t_vec p, t_vec light)
 {
-    double t;
-    double light_dst;
-    double tmp;
-    t_vec dir;
-    
-    dir = vec_unit(vec_sub(light, p));
-    light_dst =  vec_magnitude(vec_sub(light, p));
-    t = light_dst;
-    tmp = 0;
-    if (obj->id == 2)
-        tmp = sphere(obj, p, dir);
-    if(obj->id == 3)
-        tmp = plane(obj, p, dir);
-    else if(obj->id == 5)
-        tmp = cylinder(obj, p, dir);
-    else if(obj->id == 4)
-        tmp = cone(obj, p, dir);
-    if(tmp > 0 && tmp < t)
-        t = tmp;
-    return (t < light_dst && t > 0.0001) ? 1:0;
+	double	t;
+	double	light_dst;
+	double	tmp;
+	t_vec	dir;
+
+	dir = vec_unit(vec_sub(light, p));
+	light_dst = vec_magnitude(vec_sub(light, p));
+	t = light_dst;
+	tmp = 0;
+	if (obj->id == 2)
+		tmp = sphere(obj, p, dir);
+	if (obj->id == 3)
+		tmp = plane(obj, p, dir);
+	else if (obj->id == 5)
+		tmp = cylinder(obj, p, dir);
+	else if (obj->id == 4)
+		tmp = cone(obj, p, dir);
+	if (tmp > 0 && tmp < t)
+		t = tmp;
+	return (t < light_dst && t > 0.001) ? 1 : 0;
 }
 
-t_color     ambient_color(t_obj *obj)
+t_color	ambient_color(t_obj *obj)
 {
-    t_color light_c;
-    t_color color;
-    float light_int;
+	t_color	light_c;
+	t_color	color;
+	float	light_int;
 
-    light_int = obj->head->next->oneint;
-    light_int = (light_int < 0) ? 0:light_int;
-    light_int = (light_int > 255) ? 255:light_int; 
-    color = objcolor(obj->obj[2]);
-    light_c = objcolor(obj->head->next->obj[2]);
-    color.a = light_int;
-    color.r = 0.5 * color.r + (light_int / 1500) * light_c.r;
-    color.g = 0.5 * color.g + (light_int / 1500) * light_c.g;
-    color.b = 0.5 * color.b + (light_int / 1500) * light_c.b;
-    return color;
+	light_int = obj->head->next->oneint;
+	light_int = (light_int < 0) ? 0 : light_int;
+	light_int = (light_int > 255) ? 255 : light_int;
+	color = objcolor(obj->obj[2]);
+	light_c = objcolor(obj->head->next->obj[2]);
+	color.a = light_int;
+	color.r = 0.5 * color.r + (light_int / 1500) * light_c.r;
+	color.g = 0.5 * color.g + (light_int / 1500) * light_c.g;
+	color.b = 0.5 * color.b + (light_int / 1500) * light_c.b;
+	return (color);
 }
 
-double      diffuse_color(t_obj *obj, t_vec org, t_vec dir, t_light *lt)
+double	diffuse_color(t_obj *obj, t_vec org, t_vec dir, t_light *lt)
 {
-
-    lt->diff = 0;
-    lt->p = vec_add(org, vec_num(dir, lt->t));
-    lt->l = vec_unit(vec_sub(lt->light, lt->p));
-    if(obj->id == 2)
-        lt->nrm = vec_unit(vec_sub(lt->p, objvec(obj->obj[0])));
-    if(obj->id == 3)
-        lt->nrm = plane_nrm(obj, dir);
-    if(obj->id == 5)
-        lt->nrm = cylinder_nrm(obj, org, dir, lt->t, lt->p);
-    if(obj->id == 4)
-        lt->nrm = cone_nrm(obj, org, dir, lt->t, lt->p);
-    lt->diff = vec_dot(lt->nrm, lt->l)*(lt->light_int / 170);
-    if(lt->diff < 0)
-        lt->diff = 0;
-    return lt->diff;
+	lt->diff = 0;
+	lt->p = vec_add(org, vec_num(dir, lt->t));
+	lt->l = vec_unit(vec_sub(lt->light, lt->p));
+	if (obj->id == 2)
+		lt->nrm = vec_unit(vec_sub(lt->p, objvec(obj->obj[0])));
+	if (obj->id == 3)
+		lt->nrm = plane_nrm(obj, dir);
+	if (obj->id == 5)
+		lt->nrm = cylinder_nrm(obj, org, dir, lt->t, lt->p);
+	if (obj->id == 4)
+		lt->nrm = cone_nrm(obj, org, dir, lt->t, lt->p);
+	lt->diff = vec_dot(lt->nrm, lt->l) * (lt->light_int / 170);
+	if (lt->diff < 0)
+		lt->diff = 0;
+	return (lt->diff);
 }
 
-void light_helper(t_vec *light,float *light_int,t_color *color,t_obj *obj)
+void	light_helper(t_vec *light, float *light_int, t_color *color, t_obj *obj)
 {
-    *light = objvec(obj->head->next->obj[0]);
-    *light_int = obj->head->next->oneint;
-    *color = objcolor(obj->obj[2]);
-    *light_int = (*light_int < 0) ? 0:*light_int;
-    *light_int = (*light_int > 255) ? 255:*light_int;
+	*light = objvec(obj->head->next->obj[0]);
+	*light_int = obj->head->next->oneint;
+	*color = objcolor(obj->obj[2]);
+	*light_int = (*light_int < 0) ? 0 : *light_int;
+	*light_int = (*light_int > 255) ? 255 : *light_int;
 }
 
-void color_spec(t_light *lt, double spec)
+void	color_spec(t_light *lt, double spec)
 {
-    lt->color.r *= (spec*2+lt->diff); 
-    lt->color.g *= (spec*2+lt->diff); 
-    lt->color.b *= (spec*2+lt->diff); 
-    if (lt->color.r > 255)
-        lt->color.r = 255;
-    if (lt->color.g > 255)
-        lt->color.g = 255;
-    if (lt->color.b > 255)
-        lt->color.b = 255;
-    if (lt->color.r < 0)
-        lt->color.r = 0;
-    if (lt->color.g < 0)
-        lt->color.g = 0;
-    if (lt->color.b < 0)
-        lt->color.b = 0;
+	lt->color.r *= (spec * 2 + lt->diff);
+	lt->color.g *= (spec * 2 + lt->diff);
+	lt->color.b *= (spec * 2 + lt->diff);
+	if (lt->color.r > 255)
+		lt->color.r = 255;
+	if (lt->color.g > 255)
+		lt->color.g = 255;
+	if (lt->color.b > 255)
+		lt->color.b = 255;
+	if (lt->color.r < 0)
+		lt->color.r = 0;
+	if (lt->color.g < 0)
+		lt->color.g = 0;
+	if (lt->color.b < 0)
+		lt->color.b = 0;
 }
 
-t_color     light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)  
+t_color	light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
 {
-    t_light lt;
-    t_obj *lp;
-    double spec;
-    
-    lt.t = t;
-    light_helper(&lt.light,&lt.light_int,&lt.color,obj); 
-    lt.color = ambient_color(obj);
-    lt.diff = diffuse_color(obj, org, dir, &lt);
-    lt.c = vec_sub(org, lt.p);
-    lt.h = vec_unit(vec_add(vec_unit(lt.c), vec_unit(lt.l)));
-    spec = vec_dot(lt.nrm, lt.h);
-    if(spec < 0)
-        spec = 0;
-    spec = pow(spec, 64);
-    lp = obj->head->next->next;
-    while(lp)
-    {
-        if(lp != obj)
-            if(pixel_shadow(lp, lt.p,lt.light))
-            {
-                lt.color.a = 100;
-                spec = 0;
-            }
-        lp = lp->next;
-    }
-    color_spec(&lt, spec);
-    return (lt.color);
+	t_light	lt;
+	t_obj	*lp;
+	double	spec;
+
+	lt.t = t;
+	light_helper(&lt.light, &lt.light_int, &lt.color, obj);
+	lt.color = ambient_color(obj);
+	lt.diff = diffuse_color(obj, org, dir, &lt);
+	lt.h = vec_unit(vec_add(vec_unit(vec_sub(org, lt.p)), vec_unit(lt.l)));
+	spec = vec_dot(lt.nrm, lt.h);
+	spec = (spec < 0) ? 0 : spec;
+	spec = pow(spec, 64);
+	lp = obj->head->next->next;
+	while (lp)
+	{
+		if (lp != obj)
+			if (pixel_shadow(lp, lt.p, lt.light))
+			{
+				lt.color.a = 100;
+				spec = 0;
+			}
+		lp = lp->next;
+	}
+	color_spec(&lt, spec);
+	return (lt.color);
 }

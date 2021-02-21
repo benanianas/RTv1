@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:14:46 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/20 12:21:28 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/21 18:40:10 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ double		*rotation(double *dir, double *rot)
 	t_vec		v;
 
 	v = objvec(dir);
-	ang = vec_num(objvec(rot), (float)PI / 180);
+	ang = vec_num(objvec(rot), (float)M_PI / 180);
 	ret.x = v.x * cos(ang.z) - v.y * sin(ang.z);
 	ret.y = v.x * sin(ang.z) + v.y * cos(ang.z);
 	ret.z = v.z;
@@ -125,7 +125,7 @@ double		cone(t_obj *cone, t_vec org, t_vec dir)
 	anng = (double)cone->oneint;
 	cn.t = 0;
 	cn.nrm = vec_unit(objvec(cone->obj[4]));
-	cn.ang = tan(anng * (PI / 360));
+	cn.ang = tan(anng * (M_PI / 360));
 	cn.x = vec_sub(org, objvec(cone->obj[0]));
 	sol.a = vec_dot(dir, dir) - (1 + cn.ang * cn.ang) *
 		vec_dot(dir, cn.nrm) * vec_dot(dir, cn.nrm);
