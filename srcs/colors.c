@@ -26,7 +26,7 @@ t_vec cylinder_nrm(t_obj *obj, t_vec org, t_vec dir, double t, t_vec p)
     return (vec_unit(vec_sub(p, vec_add(c, vec_num(v, m)))));
 }
 
-t_vec plane_nrm(t_obj *obj, t_vec org, t_vec dir)
+t_vec plane_nrm(t_obj *obj, t_vec dir)
 {
     t_vec nrm;
 
@@ -75,7 +75,7 @@ int     pixel_shadow(t_obj *obj, t_vec p, t_vec light)
         tmp = cone(obj, p, dir);
     if(tmp > 0 && tmp < t)
         t = tmp;
-    return (t < light_dst) ? 1:0;
+    return (t < light_dst && t > 0.0001) ? 1:0;
 }
 
 t_color     ambient_color(t_obj *obj)
@@ -86,7 +86,7 @@ t_color     ambient_color(t_obj *obj)
 
     light_int = obj->head->next->oneint;
     light_int = (light_int < 0) ? 0:light_int;
-    light_int = (light_int > 255) ? 255:light_int;
+    light_int = (light_int > 255) ? 255:light_int; 
     color = objcolor(obj->obj[2]);
     light_c = objcolor(obj->head->next->obj[2]);
     color.a = light_int;
@@ -105,7 +105,7 @@ double      diffuse_color(t_obj *obj, t_vec org, t_vec dir, t_light *lt)
     if(obj->id == 2)
         lt->nrm = vec_unit(vec_sub(lt->p, objvec(obj->obj[0])));
     if(obj->id == 3)
-        lt->nrm = plane_nrm(obj, org, dir);
+        lt->nrm = plane_nrm(obj, dir);
     if(obj->id == 5)
         lt->nrm = cylinder_nrm(obj, org, dir, lt->t, lt->p);
     if(obj->id == 4)

@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/20 14:53:48 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/21 17:33:46 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,23 @@
 
 
 # include <stdlib.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include "../SDL2-2.0.12/build/include/SDL2/SDL.h"
-// # include <SDL.h>
 # include <math.h>
 # include "../libft/libft.h"
 
-# define W_WIDTH 800
+# define W_WIDTH 750
 # define W_HEIGHT 500
 # define BUFF_SIZE 100
-# define PI 3.14159265358979323846
+# define PI 3.1415926535897
+
+typedef struct      s_node
+{
+    int	i;
+	int	c;
+	int	k;
+	int	j;
+}                   t_node;
 
 typedef struct      s_vec
 {
@@ -33,6 +39,15 @@ typedef struct      s_vec
     double          y;
     double          z;
 }                   t_vec;
+
+typedef struct      s_pars
+{
+    int		i;
+	int		j;
+	int		k;
+	char	*tmp;
+	char	*tmp2;
+}                   t_pars;
 
 typedef struct      s_obj
 {
@@ -172,6 +187,7 @@ int                 check_sphere(char *tab, t_obj *obj);
 int                 check_plane(char *tab, t_obj *obj);
 int                 check_cone(char *tab, t_obj *obj);
 int                 check_cy(char *tab, t_obj *obj);
+double              *arr_add(double *pos, double *trs);
 
 
 int                 pixel_shadow(t_obj *obj, t_vec org, t_vec dir);

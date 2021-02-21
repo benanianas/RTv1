@@ -3,18 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+         #
+#    By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/11 10:39:21 by abenani           #+#    #+#              #
-#    Updated: 2021/02/16 23:39:16 by abenani          ###   ########.fr        #
+#    Updated: 2021/02/21 17:36:30 by moel-aza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RTv1
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -MD
 SDLSRC = SDL2-2.0.12.tar.gz
-HDR_F = ../include/RTv1.h
 SDL = SDL2-2.0.12
 SDLB = $(SDL)/build
 C_SDL = `$(SDLB)/sdl2-config --cflags --libs`
@@ -23,10 +22,12 @@ SRC_D = srcs
 
 
 
-SRC_F = main.c sdltools.c vecs.c rendertools.c parser1.c parsercamlight.c shapes.c colors.c   
+SRC_F = main.c sdltools.c vecs.c rendertools.c parser1.c parsercamlight.c shapes.c colors.c parser_obj.c
 SRC = $(addprefix srcs/, $(SRC_F))
 OBJ = $(SRC:.c=.o)
+DP = $(OBJ:.o=.d)
 LIBFT = libft/libft.a
+
 
 all: $(NAME)
 
@@ -44,9 +45,11 @@ $(SRC_D)/%.o: $(SRC_D)%.c
 		$(CC) $(CFLAGS) -c $< -o $@
 clean:
 		rm -f $(OBJ)
-		@$(MAKE) -C $(LIBFTD) clean
-		
+		rm -f $(DP)
+		@$(MAKE) -C $(LIBFTD) clean	
 fclean: clean
 		@$(MAKE) -C $(LIBFTD) fclean
 		rm -f $(NAME)
 		rm -rf $(SDL)
+re: fclean all
+-include $(DP)

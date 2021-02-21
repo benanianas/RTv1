@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendertools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/20 12:06:05 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/21 14:37:30 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_cam		cam_mx(t_vec from, t_vec to)
 	if (check == 1 || check == -1)
 		vecs.r = vec_unit(vec_cross(vec(0, 1, 1), vecs.f));
 	else
-		vecs.r = vec_unit(vec_cross(vec(0, 1, 0), vecs.f));
+		vecs.r = vec_unit(vec_cross(vec(0, 1, 0), vecs.f)); 
 	vecs.u = vec_unit(vec_cross(vecs.f, vecs.r));
 	vecs.pos = from;
 	return (vecs);
