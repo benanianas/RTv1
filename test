@@ -1,4 +1,4 @@
-cam : pos,0,0,0 : trs,0,0,0 : dir,0,0,-1
+cam : pos,5,0,0 : trs,0,0,0 : dir,0,0,-5
 
 light : pos,0,0,0 : trs,0,0,0 :  col,255,255,255 : int,255
 
@@ -6,10 +6,10 @@ sphere : pos,0,-5,0 : trs,0,0,0 : col,255,0,0 : rad,1
 #sphere : pos,0,20,0 : trs,0,0,0 : col,255,0,0 : rad,1
 
 #plane : pos,0,-5,0 : trs,0,0,0 : col,255,0,0 : rot,0,0,0 : dir,0,1,0
-plane : pos,0,0,-20 : trs,0,0,0 : col,255,255,0 : rot,0,0,0 : dir,0,0,-1
+#plane : pos,0,0,-20 : trs,0,0,0 : col,255,255,0 : rot,0,0,0 : dir,0,0,-1
 
 #sphere : pos,0,0,-10 : trs,0,0,0 : col,255,0,0 : rad,4
-#sphere : pos,0,0,-5 : trs,0,0,0 : col,255,0,0 : rad,2
+sphere : pos,0,0,-5 : trs,0,0,0 : col,255,0,0 : rad,2
 
 #plane : pos,0,-2,0 : trs,0,0,0 : col,255,255,0 : rot,0,0,0 : dir,1,1,0
 
