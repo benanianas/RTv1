@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/22 17:34:30 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/22 17:43:55 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 typedef struct      s_check
 {
-    char	**object;
+    char	**obt;
 	char	**param;
 	int		i;
 	int		j;

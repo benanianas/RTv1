@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:09:29 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/22 17:12:14 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/22 17:50:20 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,29 +113,18 @@ int			check_cam(char *tab, t_obj *obj)
 
 	c.i = 1;
 	c.j = 0;
-	if ((ft_stc("cam", tab, 3) != 0) || !(c.object = ft_strsplit(tab, ':'))
-			|| c.object[0] == NULL)
+	if ((ft_stc("cam", tab, 3) != 0) || !(c.obt = ft_strsplit(tab, ':'))
+			|| c.obt[0] == NULL)
 		return (0);
-	if (arr_counter(c.object, 0) == 3)
+	if (arr_counter(c.obt, 0) == 3)
 	{
-		if ((ft_stc("pos", c.object[1], 3)) || (ft_stc("trs", c.object[2], 3))
-				|| (ft_stc("dir", c.object[3], 3)))
+		if ((ft_stc("pos", c.obt[1], 3)) || (ft_stc("trs", c.obt[2], 3))
+				|| (ft_stc("dir", c.obt[3], 3)))
 			return (0);
-		while (c.object[c.i])
+		while (c.obt[c.i])
 			paramtonum(&c);
-		// {
-		// 	c.param = ft_strsplit(c.object[c.i], ',');
-		// 	if (arr_counter(c.param, 1) != 3)
-		// 		return (0);
-		// 	c.allnum[c.j] = ft_atoi(c.param[1]);
-		// 	c.allnum[c.j + 1] = ft_atoi(c.param[2]);
-		// 	c.allnum[c.j + 2] = ft_atoi(c.param[3]);
-		// 	c.i++;
-		// 	c.j += 3;
-		// 	delet_table(c.param);
-		// }
 		node_filler(0, c.allnum, 3, 0, obj);
-		delet_table(c.object);
+		delet_table(c.obt);
 		return (1);
 	}
 	return (0);
@@ -147,34 +136,23 @@ int			check_light(char *tab, t_obj *obj)
 
 	c.i = 1;
 	c.j = 0;
-	if ((ft_stc("light", tab, 5) != 0) || !(c.object = ft_strsplit(tab, ':'))
-			|| c.object[0] == NULL)
+	if ((ft_stc("light", tab, 5) != 0) || !(c.obt = ft_strsplit(tab, ':'))
+			|| c.obt[0] == NULL)
 		return (0);
-	if (arr_counter(c.object, 0) == 4)
+	if (arr_counter(c.obt, 0) == 4)
 	{
-		if ((ft_stc("pos", c.object[1], 3)) || (ft_stc("trs", c.object[2], 3))
-				|| (ft_stc("col", c.object[3], 3)) || (ft_stc("int", c.object[4], 3)))
+		if ((ft_stc("pos", c.obt[1], 3)) || (ft_stc("trs", c.obt[2], 3))
+				|| (ft_stc("col", c.obt[3], 3)) || (ft_stc("int", c.obt[4], 3)))
 			return (0);
 		while (c.i < 4)
 			paramtonum(&c);
-		// {
-		// 	c.param = ft_strsplit(c.object[c.i], ',');
-		// 	if (arr_counter(c.param, 1) != 3)
-		// 		return (0);
-		// 	c.allnum[c.j] = ft_atoi(c.param[1]);
-		// 	c.allnum[c.j + 1] = ft_atoi(c.param[2]);
-		// 	c.allnum[c.j + 2] = ft_atoi(c.param[3]);
-		// 	c.i++;
-		// 	c.j += 3;
-		// 	delet_table(c.param);
-		// }
-		c.param = ft_strsplit(c.object[c.i], ',');
+		c.param = ft_strsplit(c.obt[c.i], ',');
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
 		c.i = ft_atoi(c.param[1]);
 		node_filler(1, c.allnum, 3, c.i, obj);
 		delet_table(c.param);
-		delet_table(c.object);
+		delet_table(c.obt);
 		return (1);
 	}
 	return (0);
@@ -186,32 +164,22 @@ int		check_sphere(char *tab, t_obj *obj)
 
 	c.i = 1;
 	c.j = 0;
-	if ((ft_stc("sphere", tab, 6) != 0) || !(c.object = ft_strsplit(tab, ':')) || c.object[0] == NULL)
+	if ((ft_stc("sphere", tab, 6) != 0) || !(c.obt = ft_strsplit(tab, ':')) || c.obt[0] == NULL)
 		return (0);
-	if (arr_counter(c.object, 0) == 4)
+	if (arr_counter(c.obt, 0) == 4)
 	{
-		if ((ft_stc("pos", c.object[1], 3)) || (ft_stc("trs", c.object[2], 3)) || (ft_stc("col", c.object[3], 3)) || (ft_stc("rad", c.object[4], 3)))
+		if ((ft_stc("pos", c.obt[1], 3)) || (ft_stc("trs", c.obt[2], 3))
+			|| (ft_stc("col", c.obt[3], 3)) || (ft_stc("rad", c.obt[4], 3)))
 			return (0);
 		while (c.i < 4)
 			paramtonum(&c);
-		// {
-		// 	c.param = ft_strsplit(c.object[c.i], ',');
-		// 	if (arr_counter(c.param, 1) != 3)
-		// 		return (0);
-		// 	c.allnum[c.j] = ft_atoi(c.param[1]);
-		// 	c.allnum[c.j + 1] = ft_atoi(c.param[2]);
-		// 	c.allnum[c.j + 2] = ft_atoi(c.param[3]);
-		// 	c.i++;
-		// 	c.j += 3;
-		// 	delet_table(c.param);
-		// }
-		c.param = ft_strsplit(c.object[c.i], ',');
+		c.param = ft_strsplit(c.obt[c.i], ',');
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
 		c.i = ft_atoi(c.param[1]);
 		node_filler(2, c.allnum, 3, c.i, obj);
 		delet_table(c.param);
-		delet_table(c.object);
+		delet_table(c.obt);
 		return (1);
 	}
 	return (0);

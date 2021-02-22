@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 17:36:06 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/22 15:33:06 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/22 17:48:41 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ int		check_plane(char *tab, t_obj *obj)
 	c.i = 1;
 	c.j = 0;
 	if ((ft_stc("plane", tab, 5) != 0)
-			|| !(c.object = ft_strsplit(tab, ':')) || c.object[0] == NULL)
+			|| !(c.obt = ft_strsplit(tab, ':')) || c.obt[0] == NULL)
 		return (0);
-	if (arr_counter(c.object, 0) == 5)
+	if (arr_counter(c.obt, 0) == 5)
 	{
-		if ((ft_stc("pos", c.object[1], 3)) || (ft_stc("trs", c.object[2], 3))
-				|| (ft_stc("col", c.object[3], 3))
-				|| (ft_stc("rot", c.object[4], 3)) || (ft_stc("dir", c.object[5], 3)))
+		if ((ft_stc("pos", c.obt[1], 3)) || (ft_stc("trs", c.obt[2], 3))
+				|| (ft_stc("col", c.obt[3], 3))
+				|| (ft_stc("rot", c.obt[4], 3)) || (ft_stc("dir", c.obt[5], 3)))
 			return (0);
 		while (c.i < 6)
 			paramtonum(&c);
 		node_filler(3, c.allnum, 5, 0, obj);
-		delet_table(c.object);
+		delet_table(c.obt);
 		return (1);
 	}
 	return (0);
@@ -44,17 +44,17 @@ int		check_cone(char *tab, t_obj *obj)
 	c.i = 1;
 	c.j = 0;
 	if ((ft_stc("cone", tab, 4) != 0)
-			|| !(c.object = ft_strsplit(tab, ':')) || c.object[0] == NULL)
+			|| !(c.obt = ft_strsplit(tab, ':')) || c.obt[0] == NULL)
 		return (0);
-	if (arr_counter(c.object, 0) == 6)
+	if (arr_counter(c.obt, 0) == 6)
 	{
-		if ((ft_stc("pos", c.object[1], 3)) || (ft_stc("trs", c.object[2], 3))
-				|| (ft_stc("col", c.object[3], 3)) || (ft_stc("rot", c.object[4], 3))
-				|| (ft_stc("dir", c.object[5], 3)) || (ft_stc("ang", c.object[6], 3)))
+		if ((ft_stc("pos", c.obt[1], 3)) || (ft_stc("trs", c.obt[2], 3))
+				|| (ft_stc("col", c.obt[3], 3)) || (ft_stc("rot", c.obt[4], 3))
+				|| (ft_stc("dir", c.obt[5], 3)) || (ft_stc("ang", c.obt[6], 3)))
 			return (0);
 		while (c.i < 6)
 			paramtonum(&c);
-		c.param = ft_strsplit(c.object[c.i], ',');
+		c.param = ft_strsplit(c.obt[c.i], ',');
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
 		c.i = ft_atoi(c.param[1]);
@@ -62,7 +62,7 @@ int		check_cone(char *tab, t_obj *obj)
 			c.i = 0;
 		node_filler(4, c.allnum, 5, c.i, obj);
 		delet_table(c.param);
-		delet_table(c.object);
+		delet_table(c.obt);
 		return (1);
 	}
 	return (0);
@@ -70,7 +70,7 @@ int		check_cone(char *tab, t_obj *obj)
 
 void	paramtonum(t_check *c)
 {
-	c->param = ft_strsplit(c->object[c->i], ',');
+	c->param = ft_strsplit(c->obt[c->i], ',');
 	if (arr_counter(c->param, 1) != 3)
 	{
 		ft_putendl("file ERROR :(");
@@ -91,23 +91,23 @@ int		check_cy(char *tab, t_obj *obj)
 	c.i = 1;
 	c.j = 0;
 	if ((ft_stc("cylinder", tab, 8) != 0)
-			|| !(c.object = ft_strsplit(tab, ':')) || c.object[0] == NULL)
+			|| !(c.obt = ft_strsplit(tab, ':')) || c.obt[0] == NULL)
 		return (0);
-	if (arr_counter(c.object, 0) == 6)
+	if (arr_counter(c.obt, 0) == 6)
 	{
-		if ((ft_stc("pos", c.object[1], 3)) || (ft_stc("trs", c.object[2], 3))
-				|| (ft_stc("col", c.object[3], 3)) || (ft_stc("rot", c.object[4], 3))
-				|| (ft_stc("dir", c.object[5], 3)) || (ft_stc("rad", c.object[6], 3)))
+		if ((ft_stc("pos", c.obt[1], 3)) || (ft_stc("trs", c.obt[2], 3))
+				|| (ft_stc("col", c.obt[3], 3)) || (ft_stc("rot", c.obt[4], 3))
+				|| (ft_stc("dir", c.obt[5], 3)) || (ft_stc("rad", c.obt[6], 3)))
 			return (0);
 		while (c.i < 6)
 			paramtonum(&c);
-		c.param = ft_strsplit(c.object[c.i], ',');
+		c.param = ft_strsplit(c.obt[c.i], ',');
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
 		c.i = ft_atoi(c.param[1]);
 		node_filler(5, c.allnum, 5, c.i, obj);
 		delet_table(c.param);
-		delet_table(c.object);
+		delet_table(c.obt);
 		return (1);
 	}
 	return (0);
