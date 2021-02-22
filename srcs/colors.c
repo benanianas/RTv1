@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 18:18:31 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/22 10:54:01 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/22 15:08:51 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int		pixel_shadow(t_obj *obj, t_vec p, t_vec light)
 		tmp = cone(obj, p, dir);
 	if (tmp > 0 && tmp < t)
 		t = tmp;
-	return (t < light_dst && t > 0.001) ? 1 : 0;
+	if (t < light_dst && t > 0.001)
+		return (1);
+	return (0);
 }
 
 t_color	ambient_color(t_obj *obj)
@@ -43,8 +45,10 @@ t_color	ambient_color(t_obj *obj)
 	float	light_int;
 
 	light_int = obj->head->next->oneint;
-	light_int = (light_int < 0) ? 0 : light_int;
-	light_int = (light_int > 255) ? 255 : light_int;
+	if (light_int < 0)
+		light_int = 0;
+	if (light_int > 255)
+		light_int = 255;
 	color = objcolor(obj->obj[2]);
 	light_c = objcolor(obj->head->next->obj[2]);
 	color.a = light_int;
@@ -82,8 +86,10 @@ void	light_helper(t_vec *light, float *light_int, t_color *color, t_obj *obj)
 	*light = objvec(obj->head->next->obj[0]);
 	*light_int = obj->head->next->oneint;
 	*color = objcolor(obj->obj[2]);
-	*light_int = (*light_int < 0) ? 0 : *light_int;
-	*light_int = (*light_int > 255) ? 255 : *light_int;
+	if (*light_int < 0)
+		*light_int = 0;
+	if (*light_int > 255)
+		*light_int = 255;
 }
 
 t_color	light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
@@ -98,8 +104,8 @@ t_color	light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)
 	lt.diff = diffuse_color(obj, org, dir, &lt);
 	lt.h = vec_unit(vec_add(vec_unit(vec_sub(org, lt.p)), vec_unit(lt.l)));
 	spec = vec_dot(lt.nrm, lt.h);
-	spec = (spec < 0) ? 0 : spec;
-	spec = pow(spec, 64);
+	if ((spec = pow(spec, 64)) < 0)
+		spec = 0;
 	lp = obj->head->next->next;
 	while (lp)
 	{
