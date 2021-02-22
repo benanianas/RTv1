@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 19:26:45 by abenani           #+#    #+#             */
-/*   Updated: 2019/04/14 15:41:33 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/22 15:30:01 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strstr(const char *str, const char *find);
 char			*ft_strnstr(const char *str, const char *find, size_t n);
 int				ft_strcmp(const char *s1, const char *s2);
-int				ft_strncmp(const char *s1, const char *s2, size_t n);
+int				ft_stc(const char *s1, const char *s2, size_t n);
 int				ft_atoi(const char *str);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);

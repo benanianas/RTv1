@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsercamlight.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:09:29 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/22 10:54:01 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/22 17:12:14 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,36 +109,33 @@ int			arr_counter(char **arr, int flag)
 
 int			check_cam(char *tab, t_obj *obj)
 {
-	char	**object;
-	char	**param;
-	int		i;
-	int		j;
-	int		allnum[9];
+	t_check c;
 
-	i = 1;
-	j = 0;
-	if ((ft_strncmp("cam", tab, 3) != 0) || !(object = ft_strsplit(tab, ':'))
-			|| object[0] == NULL)
+	c.i = 1;
+	c.j = 0;
+	if ((ft_stc("cam", tab, 3) != 0) || !(c.object = ft_strsplit(tab, ':'))
+			|| c.object[0] == NULL)
 		return (0);
-	if (arr_counter(object, 0) == 3)
+	if (arr_counter(c.object, 0) == 3)
 	{
-		if ((ft_strncmp("pos", object[1], 3)) || (ft_strncmp("trs", object[2], 3))
-				|| (ft_strncmp("dir", object[3], 3)))
+		if ((ft_stc("pos", c.object[1], 3)) || (ft_stc("trs", c.object[2], 3))
+				|| (ft_stc("dir", c.object[3], 3)))
 			return (0);
-		while (object[i])
-		{
-			param = ft_strsplit(object[i], ',');
-			if (arr_counter(param, 1) != 3)
-				return (0);
-			allnum[j] = ft_atoi(param[1]);
-			allnum[j + 1] = ft_atoi(param[2]);
-			allnum[j + 2] = ft_atoi(param[3]);
-			i++;
-			j += 3;
-			delet_table(param);
-		}
-		node_filler(0, allnum, 3, 0, obj);
-		delet_table(object);
+		while (c.object[c.i])
+			paramtonum(&c);
+		// {
+		// 	c.param = ft_strsplit(c.object[c.i], ',');
+		// 	if (arr_counter(c.param, 1) != 3)
+		// 		return (0);
+		// 	c.allnum[c.j] = ft_atoi(c.param[1]);
+		// 	c.allnum[c.j + 1] = ft_atoi(c.param[2]);
+		// 	c.allnum[c.j + 2] = ft_atoi(c.param[3]);
+		// 	c.i++;
+		// 	c.j += 3;
+		// 	delet_table(c.param);
+		// }
+		node_filler(0, c.allnum, 3, 0, obj);
+		delet_table(c.object);
 		return (1);
 	}
 	return (0);
@@ -146,41 +143,75 @@ int			check_cam(char *tab, t_obj *obj)
 
 int			check_light(char *tab, t_obj *obj)
 {
-	char	**object;
-	char	**param;
-	int		i;
-	int		j;
-	int		allnum[9];
+	t_check c;
 
-	i = 1;
-	j = 0;
-	if ((ft_strncmp("light", tab, 5) != 0) || !(object = ft_strsplit(tab, ':'))
-			|| object[0] == NULL)
+	c.i = 1;
+	c.j = 0;
+	if ((ft_stc("light", tab, 5) != 0) || !(c.object = ft_strsplit(tab, ':'))
+			|| c.object[0] == NULL)
 		return (0);
-	if (arr_counter(object, 0) == 4)
+	if (arr_counter(c.object, 0) == 4)
 	{
-		if ((ft_strncmp("pos", object[1], 3)) || (ft_strncmp("trs", object[2], 3))
-				|| (ft_strncmp("col", object[3], 3)) || (ft_strncmp("int", object[4], 3)))
+		if ((ft_stc("pos", c.object[1], 3)) || (ft_stc("trs", c.object[2], 3))
+				|| (ft_stc("col", c.object[3], 3)) || (ft_stc("int", c.object[4], 3)))
 			return (0);
-		while (i < 4)
-		{
-			param = ft_strsplit(object[i], ',');
-			if (arr_counter(param, 1) != 3)
-				return (0);
-			allnum[j] = ft_atoi(param[1]);
-			allnum[j + 1] = ft_atoi(param[2]);
-			allnum[j + 2] = ft_atoi(param[3]);
-			i++;
-			j += 3;
-			delet_table(param);
-		}
-		param = ft_strsplit(object[i], ',');
-		if (arr_counter(param, 1) != 1)
+		while (c.i < 4)
+			paramtonum(&c);
+		// {
+		// 	c.param = ft_strsplit(c.object[c.i], ',');
+		// 	if (arr_counter(c.param, 1) != 3)
+		// 		return (0);
+		// 	c.allnum[c.j] = ft_atoi(c.param[1]);
+		// 	c.allnum[c.j + 1] = ft_atoi(c.param[2]);
+		// 	c.allnum[c.j + 2] = ft_atoi(c.param[3]);
+		// 	c.i++;
+		// 	c.j += 3;
+		// 	delet_table(c.param);
+		// }
+		c.param = ft_strsplit(c.object[c.i], ',');
+		if (arr_counter(c.param, 1) != 1)
 			return (0);
-		i = ft_atoi(param[1]);
-		node_filler(1, allnum, 3, i, obj);
-		delet_table(param);
-		delet_table(object);
+		c.i = ft_atoi(c.param[1]);
+		node_filler(1, c.allnum, 3, c.i, obj);
+		delet_table(c.param);
+		delet_table(c.object);
+		return (1);
+	}
+	return (0);
+}
+
+int		check_sphere(char *tab, t_obj *obj)
+{
+	t_check c;
+
+	c.i = 1;
+	c.j = 0;
+	if ((ft_stc("sphere", tab, 6) != 0) || !(c.object = ft_strsplit(tab, ':')) || c.object[0] == NULL)
+		return (0);
+	if (arr_counter(c.object, 0) == 4)
+	{
+		if ((ft_stc("pos", c.object[1], 3)) || (ft_stc("trs", c.object[2], 3)) || (ft_stc("col", c.object[3], 3)) || (ft_stc("rad", c.object[4], 3)))
+			return (0);
+		while (c.i < 4)
+			paramtonum(&c);
+		// {
+		// 	c.param = ft_strsplit(c.object[c.i], ',');
+		// 	if (arr_counter(c.param, 1) != 3)
+		// 		return (0);
+		// 	c.allnum[c.j] = ft_atoi(c.param[1]);
+		// 	c.allnum[c.j + 1] = ft_atoi(c.param[2]);
+		// 	c.allnum[c.j + 2] = ft_atoi(c.param[3]);
+		// 	c.i++;
+		// 	c.j += 3;
+		// 	delet_table(c.param);
+		// }
+		c.param = ft_strsplit(c.object[c.i], ',');
+		if (arr_counter(c.param, 1) != 1)
+			return (0);
+		c.i = ft_atoi(c.param[1]);
+		node_filler(2, c.allnum, 3, c.i, obj);
+		delet_table(c.param);
+		delet_table(c.object);
 		return (1);
 	}
 	return (0);

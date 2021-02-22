@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 22:18:36 by abenani           #+#    #+#             */
-/*   Updated: 2019/03/31 22:23:28 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/22 15:29:29 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+int		ft_stc(const char *s1, const char *s2, size_t n)
 {
 	size_t i;
 
