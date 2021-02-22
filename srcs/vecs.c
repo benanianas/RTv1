@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vecs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 11:25:34 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/20 12:09:13 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/22 10:54:01 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/RTv1.h"
+#include "../include/rtv1.h"
 
 t_vec		vec(double x, double y, double z)
 {

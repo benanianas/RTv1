@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsercamlight.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:09:29 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/21 18:01:25 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/22 10:54:01 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/RTv1.h"
+#include "../include/rtv1.h"
 
 void		first_node(t_obj *obj, int *object, int objnum)
 {

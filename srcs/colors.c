@@ -3,57 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 18:18:31 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/21 18:40:01 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/22 10:54:01 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/RTv1.h"
-
-t_vec	cylinder_nrm(t_obj *obj, t_vec org, t_vec dir, double t, t_vec p)
-{
-	t_vec	v;
-	t_vec	c;
-	t_vec	x;
-	double	m;
-
-	v = vec_unit(objvec(obj->obj[4]));
-	c = objvec(obj->obj[0]);
-	x = vec_sub(org, c);
-	m = vec_dot(vec_unit(dir), v) * t + vec_dot(x, v);
-	return (vec_unit(vec_sub(p, vec_add(c, vec_num(v, m)))));
-}
-
-t_vec	plane_nrm(t_obj *obj, t_vec dir)
-{
-	t_vec nrm;
-
-	nrm = vec_unit(objvec(obj->obj[4]));
-	if (vec_dot(dir, nrm) > 0)
-		nrm = vec_num(nrm, -1);
-	return (nrm);
-}
-
-t_vec	cone_nrm(t_obj *obj, t_vec org, t_vec dir, double t, t_vec p)
-{
-	t_vec	nrm;
-	t_vec	c;
-	t_vec	v;
-	t_vec	x;
-	double	k;
-	double	m;
-
-	x = vec_sub(org, objvec(obj->obj[0]));
-	k = tan(obj->oneint * (M_PI / 360));
-	v = vec_unit(objvec(obj->obj[4]));
-	c = objvec(obj->obj[0]);
-	m = vec_dot(dir, vec_num(v, t)) + vec_dot(x, v);
-	nrm = vec_unit(vec_sub(vec_sub(p, c),
-				vec_num(vec_num(v, (1 + k * k)), m)));
-	return (nrm);
-}
+#include "../include/rtv1.h"
 
 int		pixel_shadow(t_obj *obj, t_vec p, t_vec light)
 {
@@ -99,6 +56,10 @@ t_color	ambient_color(t_obj *obj)
 
 double	diffuse_color(t_obj *obj, t_vec org, t_vec dir, t_light *lt)
 {
+	t_ray ray;
+
+	ray.org = org;
+	ray.dir = dir;
 	lt->diff = 0;
 	lt->p = vec_add(org, vec_num(dir, lt->t));
 	lt->l = vec_unit(vec_sub(lt->light, lt->p));
@@ -107,9 +68,9 @@ double	diffuse_color(t_obj *obj, t_vec org, t_vec dir, t_light *lt)
 	if (obj->id == 3)
 		lt->nrm = plane_nrm(obj, dir);
 	if (obj->id == 5)
-		lt->nrm = cylinder_nrm(obj, org, dir, lt->t, lt->p);
+		lt->nrm = cylinder_nrm(obj, ray, lt->t, lt->p);
 	if (obj->id == 4)
-		lt->nrm = cone_nrm(obj, org, dir, lt->t, lt->p);
+		lt->nrm = cone_nrm(obj, ray, lt->t, lt->p);
 	lt->diff = vec_dot(lt->nrm, lt->l) * (lt->light_int / 170);
 	if (lt->diff < 0)
 		lt->diff = 0;
@@ -123,25 +84,6 @@ void	light_helper(t_vec *light, float *light_int, t_color *color, t_obj *obj)
 	*color = objcolor(obj->obj[2]);
 	*light_int = (*light_int < 0) ? 0 : *light_int;
 	*light_int = (*light_int > 255) ? 255 : *light_int;
-}
-
-void	color_spec(t_light *lt, double spec)
-{
-	lt->color.r *= (spec * 2 + lt->diff);
-	lt->color.g *= (spec * 2 + lt->diff);
-	lt->color.b *= (spec * 2 + lt->diff);
-	if (lt->color.r > 255)
-		lt->color.r = 255;
-	if (lt->color.g > 255)
-		lt->color.g = 255;
-	if (lt->color.b > 255)
-		lt->color.b = 255;
-	if (lt->color.r < 0)
-		lt->color.r = 0;
-	if (lt->color.g < 0)
-		lt->color.g = 0;
-	if (lt->color.b < 0)
-		lt->color.b = 0;
 }
 
 t_color	light_pixel(t_obj *obj, t_vec org, t_vec dir, double t)

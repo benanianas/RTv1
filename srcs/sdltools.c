@@ -6,11 +6,11 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 15:13:01 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/20 11:24:38 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/22 10:54:01 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/RTv1.h"
+#include "../include/rtv1.h"
 
 int		startsdl(t_sdl *sdl)
 {
