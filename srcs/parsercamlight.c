@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:09:29 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/23 14:24:45 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:49:29 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			arr_counter(char **arr, int flag)
 	}
 }
 
-void	check_helper(char **param, char **obt)
+void		check_helper(char **param, char **obt)
 {
 	delet_table(param);
 	delet_table(obt);
@@ -80,10 +80,8 @@ int			check_light(char *tab, t_obj *obj)
 
 	c.i = 1;
 	c.j = 0;
-	if ((ft_stc("light", tab, 5) != 0) || !(c.obt = ft_strsplit(tab, ':'))
-			|| c.obt[0] == NULL)
-		return (0);
-	if (arr_counter(c.obt, 0) == 4)
+	if (((ft_stc("light", tab, 5) == 0) && (c.obt = ft_strsplit(tab, ':'))
+	&& c.obt[0] != NULL) && arr_counter(c.obt, 0) == 4)
 	{
 		if ((ft_stc("pos", c.obt[1], 3)) || (ft_stc("trs", c.obt[2], 3))
 				|| (ft_stc("col", c.obt[3], 3)) || (ft_stc("int", c.obt[4], 3)))
@@ -110,9 +108,8 @@ int			check_sphere(char *tab, t_obj *obj)
 
 	c.i = 1;
 	c.j = 0;
-	if ((ft_stc("sphere", tab, 6) != 0) || !(c.obt = ft_strsplit(tab, ':')) || c.obt[0] == NULL)
-		return (0);
-	if (arr_counter(c.obt, 0) == 4)
+	if (((ft_stc("sphere", tab, 6) == 0) && (c.obt = ft_strsplit(tab, ':'))
+	&& c.obt[0] != NULL) && arr_counter(c.obt, 0) == 4)
 	{
 		if ((ft_stc("pos", c.obt[1], 3)) || (ft_stc("trs", c.obt[2], 3))
 			|| (ft_stc("col", c.obt[3], 3)) || (ft_stc("rad", c.obt[4], 3)))

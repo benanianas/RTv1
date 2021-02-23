@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 17:36:06 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/23 14:25:05 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:44:47 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ int		check_cone(char *tab, t_obj *obj)
 		c.param = ft_strsplit(c.obt[c.i], ',');
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
-		if ((c.i = ft_atoi(c.param[1])) == 180)
-			c.i = 0;
+		// if ((c.i = ft_atoi(c.param[1])) == 180)
+		// 	c.i = 0;
+		cone_helper(&c);
 		o.objnum = 5;
 		o.add = c.i;
 		node_filler(4, c.allnum, o, obj);
@@ -92,10 +93,8 @@ int		check_cy(char *tab, t_obj *obj)
 
 	c.i = 1;
 	c.j = 0;
-	if ((ft_stc("cylinder", tab, 8) != 0)
-			|| !(c.obt = ft_strsplit(tab, ':')) || c.obt[0] == NULL)
-		return (0);
-	if (arr_counter(c.obt, 0) == 6)
+	if (((ft_stc("cylinder", tab, 8) == 0) && (c.obt = ft_strsplit(tab, ':'))
+	&& c.obt[0] != NULL) && arr_counter(c.obt, 0) == 6)
 	{
 		if ((ft_stc("pos", c.obt[1], 3)) || (ft_stc("trs", c.obt[2], 3))
 				|| (ft_stc("col", c.obt[3], 3)) || (ft_stc("rot", c.obt[4], 3))

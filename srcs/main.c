@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 11:37:19 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/22 10:54:01 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/23 14:50:56 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ double		*arr_add(double *pos, double *trs)
 	return (pos);
 }
 
-void		free_object(t_obj	*object)
+void		free_object(t_obj *object)
 {
-	int	i;
+	int		i;
 	t_obj	*object2;
 
 	object = object->head;
@@ -41,7 +41,7 @@ void		free_object(t_obj	*object)
 	}
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_obj	*object;
 	t_sdl	sdl;

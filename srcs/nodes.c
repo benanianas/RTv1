@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:34:47 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/23 11:59:10 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:46:46 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		first_node(t_obj *obj, int *object, int objnum)
 	obj->obj[3] = NULL;
 }
 
-void	node_helper(t_node n, t_obj *obj, int *object, int objnum)
+void		node_helper(t_node n, t_obj *obj, int *object, int objnum)
 {
 	while (++n.c < objnum * 3)
 	{
@@ -81,4 +81,10 @@ void		node_filler(int id, int *object, t_objnum o, t_obj *obj)
 		node_helper(n, obj, object, o.objnum);
 	}
 	obj->obj[o.objnum] = NULL;
+}
+
+void		cone_helper(t_check *c)
+{
+    if ((c->i = ft_atoi(c->param[1])) == 180)
+			c->i = 0;
 }

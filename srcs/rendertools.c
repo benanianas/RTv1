@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/22 15:03:53 by abenani          ###   ########.fr       */
+/*   Updated: 2021/02/23 14:51:37 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_cam		cam_mx(t_vec from, t_vec to)
 	if (check == 1 || check == -1)
 		vecs.r = vec_unit(vec_cross(vec(0, 1, 1), vecs.f));
 	else
-		vecs.r = vec_unit(vec_cross(vec(0, 1, 0), vecs.f)); 
+		vecs.r = vec_unit(vec_cross(vec(0, 1, 0), vecs.f));
 	vecs.u = vec_unit(vec_cross(vecs.f, vecs.r));
 	vecs.pos = from;
 	return (vecs);
