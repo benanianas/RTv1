@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 17:36:06 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/23 14:44:47 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:52:59 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int		check_cone(char *tab, t_obj *obj)
 		c.param = ft_strsplit(c.obt[c.i], ',');
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
-		// if ((c.i = ft_atoi(c.param[1])) == 180)
-		// 	c.i = 0;
 		cone_helper(&c);
 		o.objnum = 5;
 		o.add = c.i;
