@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 17:36:06 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/23 12:09:03 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:25:05 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int		check_cone(char *tab, t_obj *obj)
 		o.objnum = 5;
 		o.add = c.i;
 		node_filler(4, c.allnum, o, obj);
-		delet_table(c.param);
-		delet_table(c.obt);
+		check_helper(c.param, c.obt);
 		return (1);
 	}
 	return (0);
@@ -110,8 +109,7 @@ int		check_cy(char *tab, t_obj *obj)
 		o.add = ft_atoi(c.param[1]);
 		o.objnum = 5;
 		node_filler(5, c.allnum, o, obj);
-		delet_table(c.param);
-		delet_table(c.obt);
+		check_helper(c.param, c.obt);
 		return (1);
 	}
 	return (0);

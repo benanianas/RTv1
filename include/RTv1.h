@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/23 12:04:34 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:23:23 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,5 +204,6 @@ int					check_cy(char *tab, t_obj *obj);
 double				*arr_add(double *pos, double *trs);
 int					pixel_shadow(t_obj *obj, t_vec org, t_vec dir);
 void				paramtonum(t_check *c);
+void				check_helper(char **param, char **obt);
 
 #endif

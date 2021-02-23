@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:09:29 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/23 12:04:11 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:24:45 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ int			arr_counter(char **arr, int flag)
 		}
 		return (i - 1);
 	}
+}
+
+void	check_helper(char **param, char **obt)
+{
+	delet_table(param);
+	delet_table(obt);
 }
 
 int			check_cam(char *tab, t_obj *obj)
@@ -91,8 +97,7 @@ int			check_light(char *tab, t_obj *obj)
 		o.objnum = 3;
 		o.add = c.i;
 		node_filler(1, c.allnum, o, obj);
-		delet_table(c.param);
-		delet_table(c.obt);
+		check_helper(c.param, c.obt);
 		return (1);
 	}
 	return (0);
@@ -121,8 +126,7 @@ int			check_sphere(char *tab, t_obj *obj)
 		o.objnum = 3;
 		o.add = c.i;
 		node_filler(2, c.allnum, o, obj);
-		delet_table(c.param);
-		delet_table(c.obt);
+		check_helper(c.param, c.obt);
 		return (1);
 	}
 	return (0);
