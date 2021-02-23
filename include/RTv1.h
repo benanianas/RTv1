@@ -22,7 +22,7 @@
 # define BUFF_SIZE 100
 
 typedef struct		s_check
-{	
+{
 	char			**obt;
 	char			**param;
 	int				i;
