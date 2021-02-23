@@ -41,18 +41,18 @@ void		first_node(t_obj *obj, int *object, int objnum)
 	obj->obj[3] = NULL;
 }
 
-void node_helper(t_node n, t_obj *obj , int *object , int objnum)
+void	node_helper(t_node n, t_obj *obj, int *object, int objnum)
 {
-    while (++n.c < objnum * 3)
+	while (++n.c < objnum * 3)
+	{
+		if (n.c == 3 || n.c == 6 || n.c == 9 || n.c == 12 || n.c == 15)
 		{
-			if (n.c == 3 || n.c == 6 || n.c == 9 || n.c == 12 || n.c == 15)
-			{
-				n.j++;
-				n.k = 0;
-			}
-			obj->obj[n.j][n.k] = object[n.c];
-			n.k++;
+			n.j++;
+			n.k = 0;
 		}
+		obj->obj[n.j][n.k] = object[n.c];
+		n.k++;
+	}
 }
 
 void		node_filler(int id, int *object, t_objnum o, t_obj *obj)
@@ -78,7 +78,7 @@ void		node_filler(int id, int *object, t_objnum o, t_obj *obj)
 		while (++n.i < o.objnum)
 			obj->obj[n.i] = malloc(sizeof(double) * 3);
 		obj->next = NULL;
-        node_helper(n, obj, object, o.objnum);
+		node_helper(n, obj, object, o.objnum);
 	}
 	obj->obj[o.objnum] = NULL;
 }

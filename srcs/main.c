@@ -20,16 +20,16 @@ double		*arr_add(double *pos, double *trs)
 	return (pos);
 }
 
-void free_object(t_obj	*object)
+void		free_object(t_obj	*object)
 {
-	int i;
+	int	i;
 	t_obj	*object2;
-	
+
 	object = object->head;
 	while (object != NULL)
 	{
 		i = 0;
-		while(object->obj[i])
+		while (object->obj[i])
 		{
 			free(object->obj[i]);
 			i++;
@@ -41,7 +41,7 @@ void free_object(t_obj	*object)
 	}
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_obj	*object;
 	t_sdl	sdl;

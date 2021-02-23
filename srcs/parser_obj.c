@@ -14,8 +14,8 @@
 
 int		check_plane(char *tab, t_obj *obj)
 {
-	t_check c;
-	t_objnum o;
+	t_check		c;
+	t_objnum	o;
 
 	c.i = 1;
 	c.j = 0;
@@ -41,8 +41,8 @@ int		check_plane(char *tab, t_obj *obj)
 
 int		check_cone(char *tab, t_obj *obj)
 {
-	t_check c;
-	t_objnum o;
+	t_check		c;
+	t_objnum	o;
 
 	c.i = 1;
 	c.j = 0;
@@ -58,7 +58,7 @@ int		check_cone(char *tab, t_obj *obj)
 		c.param = ft_strsplit(c.obt[c.i], ',');
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
-		if((c.i = ft_atoi(c.param[1])) == 180)
+		if ((c.i = ft_atoi(c.param[1])) == 180)
 			c.i = 0;
 		o.objnum = 5;
 		o.add = c.i;
@@ -88,8 +88,8 @@ void	paramtonum(t_check *c)
 
 int		check_cy(char *tab, t_obj *obj)
 {
-	t_check c;
-	t_objnum o;
+	t_check		c;
+	t_objnum	o;
 
 	c.i = 1;
 	c.j = 0;

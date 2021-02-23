@@ -43,8 +43,8 @@ int			arr_counter(char **arr, int flag)
 
 int			check_cam(char *tab, t_obj *obj)
 {
-	t_check c;
-	t_objnum o;
+	t_check		c;
+	t_objnum	o;
 
 	c.i = 1;
 	c.j = 0;
@@ -69,8 +69,8 @@ int			check_cam(char *tab, t_obj *obj)
 
 int			check_light(char *tab, t_obj *obj)
 {
-	t_check c;
-	t_objnum o;
+	t_check		c;
+	t_objnum	o;
 
 	c.i = 1;
 	c.j = 0;
@@ -100,8 +100,8 @@ int			check_light(char *tab, t_obj *obj)
 
 int			check_sphere(char *tab, t_obj *obj)
 {
-	t_check c;
-	t_objnum o;
+	t_check		c;
+	t_objnum	o;
 
 	c.i = 1;
 	c.j = 0;
