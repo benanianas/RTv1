@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/23 14:45:13 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 15:02:03 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 # define W_HEIGHT 500
 # define BUFF_SIZE 100
 
-typedef struct      s_check
-{
-    char	**obt;
-	char	**param;
-	int		i;
-	int		j;
-	int		allnum[15];
-}                   t_check;
+typedef struct		s_check
+{	
+	char			**obt;
+	char			**param;
+	int				i;
+	int				j;
+	int				allnum[15];
+}					t_check;
 
 typedef	struct		s_node
 {

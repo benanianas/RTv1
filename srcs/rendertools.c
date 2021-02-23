@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendertools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenani <abenani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:54:49 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/23 14:51:37 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:57:31 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,36 +102,4 @@ t_cam		cam_mx(t_vec from, t_vec to)
 	vecs.u = vec_unit(vec_cross(vecs.f, vecs.r));
 	vecs.pos = from;
 	return (vecs);
-}
-
-t_vec		camera_transform(t_cam cam, t_vec old_p)
-{
-	t_vec	new_p;
-
-	new_p.x = old_p.x * cam.r.x + old_p.y * cam.u.x +
-		old_p.z * cam.f.x + cam.pos.x;
-	new_p.y = old_p.x * cam.r.y + old_p.y * cam.u.y +
-		old_p.z * cam.f.y + cam.pos.y;
-	new_p.z = old_p.x * cam.r.z + old_p.y * cam.u.z +
-		old_p.z * cam.f.z + cam.pos.z;
-	return (new_p);
-}
-
-t_vec		objvec(double *arr)
-{
-	t_vec vect;
-
-	vect = vec(arr[0], arr[1], arr[2]);
-	return (vect);
-}
-
-t_color		objcolor(double *arr)
-{
-	t_color col;
-
-	col.r = arr[0];
-	col.g = arr[1];
-	col.b = arr[2];
-	col.a = 255;
-	return (col);
 }
