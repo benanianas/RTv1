@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 11:11:23 by abenani           #+#    #+#             */
-/*   Updated: 2021/02/22 17:43:55 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 12:04:34 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,12 @@ typedef struct		s_plane
 	double			t;
 }					t_plane;
 
+typedef struct		s_objnum
+{
+	int				objnum;
+	int				add;
+}					t_objnum;
+
 typedef struct		s_cone
 {
 	t_vec			d;
@@ -189,8 +195,7 @@ char				**nospace_nocomment(char **table);
 char				**file_reader(char **av, char **table);
 int					parser(int ac, char **av, t_obj *object);
 int					arr_counter(char **arr, int flag);
-void				node_filler(int id, int *object, int objnum,
-		int add, t_obj *obj);
+void				node_filler(int id, int *object, t_objnum o, t_obj *obj);
 void				first_node(t_obj *obj, int *object, int objnum);
 int					check_sphere(char *tab, t_obj *obj);
 int					check_plane(char *tab, t_obj *obj);

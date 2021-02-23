@@ -6,77 +6,11 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:09:29 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/22 17:50:20 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 12:04:11 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/rtv1.h"
-
-void		first_node(t_obj *obj, int *object, int objnum)
-{
-	t_node n;
-
-	n.i = -1;
-	n.c = 0;
-	n.k = 0;
-	n.j = 0;
-	obj->id = 0;
-	obj->oneint = 0;
-	obj->obj = malloc(sizeof(double *) * 4);
-	while (++n.i < 3)
-		obj->obj[n.i] = malloc(sizeof(double) * 3);
-	obj->next = NULL;
-	obj->head = obj;
-	while (n.c < objnum * 3)
-	{
-		if (n.c == 3 || n.c == 6)
-		{
-			n.k++;
-			n.j = 0;
-		}
-		obj->obj[n.k][n.j] = object[n.c];
-		n.j++;
-		n.c++;
-	}
-	obj->obj[3] = NULL;
-}
-
-void		node_filler(int id, int *object, int objnum, int add, t_obj *obj)
-{
-	t_node n;
-
-	n.i = -1;
-	n.c = -1;
-	n.j = 0;
-	n.k = 0;
-	if (id == 0)
-		first_node(obj, object, objnum);
-	else
-	{
-		while (obj->next != NULL)
-			obj = obj->next;
-		obj->next = (t_obj *)malloc(sizeof(t_obj));
-		obj->next->head = obj->head;
-		obj = obj->next;
-		obj->id = id;
-		obj->oneint = add;
-		obj->obj = malloc(sizeof(double *) * objnum + 1);
-		while (++n.i < objnum)
-			obj->obj[n.i] = malloc(sizeof(double) * 3);
-		obj->next = NULL;
-		while (++n.c < objnum * 3)
-		{
-			if (n.c == 3 || n.c == 6 || n.c == 9 || n.c == 12 || n.c == 15)
-			{
-				n.j++;
-				n.k = 0;
-			}
-			obj->obj[n.j][n.k] = object[n.c];
-			n.k++;
-		}
-	}
-	obj->obj[objnum] = NULL;
-}
 
 int			arr_counter(char **arr, int flag)
 {
@@ -110,6 +44,7 @@ int			arr_counter(char **arr, int flag)
 int			check_cam(char *tab, t_obj *obj)
 {
 	t_check c;
+	t_objnum o;
 
 	c.i = 1;
 	c.j = 0;
@@ -123,7 +58,9 @@ int			check_cam(char *tab, t_obj *obj)
 			return (0);
 		while (c.obt[c.i])
 			paramtonum(&c);
-		node_filler(0, c.allnum, 3, 0, obj);
+		o.objnum = 3;
+		o.add = 0;
+		node_filler(0, c.allnum, o, obj);
 		delet_table(c.obt);
 		return (1);
 	}
@@ -133,6 +70,7 @@ int			check_cam(char *tab, t_obj *obj)
 int			check_light(char *tab, t_obj *obj)
 {
 	t_check c;
+	t_objnum o;
 
 	c.i = 1;
 	c.j = 0;
@@ -150,7 +88,9 @@ int			check_light(char *tab, t_obj *obj)
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
 		c.i = ft_atoi(c.param[1]);
-		node_filler(1, c.allnum, 3, c.i, obj);
+		o.objnum = 3;
+		o.add = c.i;
+		node_filler(1, c.allnum, o, obj);
 		delet_table(c.param);
 		delet_table(c.obt);
 		return (1);
@@ -158,9 +98,10 @@ int			check_light(char *tab, t_obj *obj)
 	return (0);
 }
 
-int		check_sphere(char *tab, t_obj *obj)
+int			check_sphere(char *tab, t_obj *obj)
 {
 	t_check c;
+	t_objnum o;
 
 	c.i = 1;
 	c.j = 0;
@@ -177,7 +118,9 @@ int		check_sphere(char *tab, t_obj *obj)
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
 		c.i = ft_atoi(c.param[1]);
-		node_filler(2, c.allnum, 3, c.i, obj);
+		o.objnum = 3;
+		o.add = c.i;
+		node_filler(2, c.allnum, o, obj);
 		delet_table(c.param);
 		delet_table(c.obt);
 		return (1);

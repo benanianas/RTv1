@@ -6,7 +6,7 @@
 /*   By: moel-aza <moel-aza@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 17:36:06 by moel-aza          #+#    #+#             */
-/*   Updated: 2021/02/22 17:48:41 by moel-aza         ###   ########.fr       */
+/*   Updated: 2021/02/23 12:09:03 by moel-aza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		check_plane(char *tab, t_obj *obj)
 {
 	t_check c;
+	t_objnum o;
 
 	c.i = 1;
 	c.j = 0;
@@ -29,24 +30,24 @@ int		check_plane(char *tab, t_obj *obj)
 			return (0);
 		while (c.i < 6)
 			paramtonum(&c);
-		node_filler(3, c.allnum, 5, 0, obj);
+		o.objnum = 5;
+		o.add = 0;
+		node_filler(3, c.allnum, o, obj);
 		delet_table(c.obt);
 		return (1);
 	}
 	return (0);
 }
 
-
 int		check_cone(char *tab, t_obj *obj)
 {
 	t_check c;
+	t_objnum o;
 
 	c.i = 1;
 	c.j = 0;
-	if ((ft_stc("cone", tab, 4) != 0)
-			|| !(c.obt = ft_strsplit(tab, ':')) || c.obt[0] == NULL)
-		return (0);
-	if (arr_counter(c.obt, 0) == 6)
+	if (((ft_stc("cone", tab, 4) == 0) && (c.obt = ft_strsplit(tab, ':'))
+	&& c.obt[0] != NULL) && arr_counter(c.obt, 0) == 6)
 	{
 		if ((ft_stc("pos", c.obt[1], 3)) || (ft_stc("trs", c.obt[2], 3))
 				|| (ft_stc("col", c.obt[3], 3)) || (ft_stc("rot", c.obt[4], 3))
@@ -57,10 +58,11 @@ int		check_cone(char *tab, t_obj *obj)
 		c.param = ft_strsplit(c.obt[c.i], ',');
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
-		c.i = ft_atoi(c.param[1]);
-		if (c.i == 180)
+		if((c.i = ft_atoi(c.param[1])) == 180)
 			c.i = 0;
-		node_filler(4, c.allnum, 5, c.i, obj);
+		o.objnum = 5;
+		o.add = c.i;
+		node_filler(4, c.allnum, o, obj);
 		delet_table(c.param);
 		delet_table(c.obt);
 		return (1);
@@ -87,6 +89,7 @@ void	paramtonum(t_check *c)
 int		check_cy(char *tab, t_obj *obj)
 {
 	t_check c;
+	t_objnum o;
 
 	c.i = 1;
 	c.j = 0;
@@ -104,8 +107,9 @@ int		check_cy(char *tab, t_obj *obj)
 		c.param = ft_strsplit(c.obt[c.i], ',');
 		if (arr_counter(c.param, 1) != 1)
 			return (0);
-		c.i = ft_atoi(c.param[1]);
-		node_filler(5, c.allnum, 5, c.i, obj);
+		o.add = ft_atoi(c.param[1]);
+		o.objnum = 5;
+		node_filler(5, c.allnum, o, obj);
 		delet_table(c.param);
 		delet_table(c.obt);
 		return (1);
